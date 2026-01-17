@@ -97,7 +97,7 @@ public class ProyectoUd5Application {
 	public class ProductoMapper implements RowMapper<Producto> {
 		@Override
 		public Producto mapRow(ResultSet rs, int rowNum) throws SQLException {
-			return new Producto(rs.getInt("id"), rs.getString("nombreProd"), rs.getInt("marca"), rs.getInt("talla"),
+			return new Producto(rs.getInt("id"), rs.getString("nombreProd"), rs.getString("marca"), rs.getInt("talla"),
 					rs.getDouble("precioProd"), rs.getBoolean("reservado"));
 		}
 	}
@@ -161,29 +161,61 @@ public class ProyectoUd5Application {
 
 	// busqueda por precio max NO SE SI ESTE ESTA BIEN DEL TODO
 	@GetMapping("/productos/precio")
-	public List<Producto> busquedaPrecio(@RequestParam(value = "precioMax", defaultValue = "130") int precioMax) {
+	public List<Producto> busquedaPrecio(@RequestParam(value = "precioMax", defaultValue = "130") double precioMax) {
 		try {
-			return jdbcTemplate.query("SELECTO * FROM productos WHERE precio <= ? AND reservado = false",
+			return jdbcTemplate.query("SELECT * FROM productos WHERE precioProd <= ? AND reservado = false",
 					new ProductoMapper(), precioMax);
-
 		} catch (Exception e) {
 			System.out.println("Error al buscar por precio");
 			return null;
 		}
 	}
-	
-	//busqueda por nombre
+
+	// busqueda por nombre
 	@GetMapping("/productos/nombre")
 	public List<Producto> busquedaNombre(@RequestParam(value = "nombre", defaultValue = "-") String nombre) {
 		try {
-			return jdbcTemplate.query("SELECT * FROM productos WHERE marca = ? AND reservado = false",
-					new ProductoMapper(), nombre);
-
+			return jdbcTemplate.query("SELECT * FROM productos WHERE nombreProd LIKE ? AND reservado = false",
+					new ProductoMapper(), "%" + nombre + "%");
 		} catch (Exception e) {
-			System.out.println("Error al buscar por marca");
+			System.out.println("Error al buscar por nombre");
 			return null;
 		}
+	}
 
+	// ahora el crud de clientes que solo se va a usar en consola
+	// endpoint que lista a los clientes para la consola
+	@GetMapping("/clientes/listar")
+	public List<Cliente> listarClientes() {
+		return jdbcTemplate.query("SELECT * FROM clientes", new ClienteMapper());
+	}
+
+	// endpoint para obtener el cliente desde la consola por ID
+	@GetMapping("/clientes/{id}")
+	public Cliente obtenerClientePorId(@RequestParam(value = "id") int id) {
+		try {
+			return jdbcTemplate.queryForObject("SELECT * FROM clientes WHERE id = ?", new ClienteMapper(), id);
+		} catch (Exception e) {
+			System.out.println("Cliente no encontrado");
+			return null;
+		}
+	}
+
+	// endpoint para actualizar un cliente que solo se podra hacer por consola
+	@GetMapping("/clientes/actualizar")
+	public int actualizarCliente(@RequestParam(value = "id") int id, @RequestParam(value = "nombre") String nombre,
+			@RequestParam(value = "apellido") String apellido, @RequestParam(value = "contraseña") String contrasenya,
+			@RequestParam(value = "saldo") double saldo) {
+		return jdbcTemplate.update(
+				"UPDATE clientes SET nombre = ?, apellido = ?, contraseña = ?, saldo = ? WHERE id = ?", nombre,
+				apellido, contrasenya, saldo, id);
+	}
+
+	// endpoint de eliminar un cliente que solo lo podra hacer el admin desde la
+	// consola
+	@GetMapping("/clientes/borrar")
+	public int borrarCliente(@RequestParam(value = "id") int id) {
+		return jdbcTemplate.update("DELETE FROM clientes WHERE id = ?", id);
 	}
 
 	public static void main(String[] args) {

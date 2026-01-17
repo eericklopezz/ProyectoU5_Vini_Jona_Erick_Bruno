@@ -4,7 +4,7 @@ public class Producto {
 
 	private int id;
 	private String nombreProd;
-	private int marca;
+	private String marca;
 	private int talla;
 	private double precioProd;
 	private boolean reservado;
@@ -13,7 +13,7 @@ public class Producto {
 		super();
 	}
 
-	public Producto(int id, String nombreProd, int marca, int talla, double precioProd, boolean reservado) {
+	public Producto(int id, String nombreProd, String marca, int talla, double precioProd, boolean reservado) {
 		super();
 		this.id = id;
 		this.nombreProd = nombreProd;
@@ -54,14 +54,14 @@ public class Producto {
 	/**
 	 * @return the marca
 	 */
-	public int getMarca() {
+	public String getMarca() {
 		return marca;
 	}
 
 	/**
 	 * @param marca the marca to set
 	 */
-	public void setMarca(int marca) {
+	public void setMarca(String marca) {
 		this.marca = marca;
 	}
 
