@@ -211,7 +211,7 @@ public class ProyectoUd5Application {
 
 	// endpoint de eliminar un cliente que solo lo podra hacer el admin desde la
 	// consola
-	@GetMapping("/clientes/borrar")
+	@GetMapping("/clientes/borrar/{id}")
 	public int borrarCliente(@RequestParam(value = "id") int id) {
 		return jdbcTemplate.update("DELETE FROM clientes WHERE id = ?", id);
 	}
@@ -219,6 +219,52 @@ public class ProyectoUd5Application {
 	public static void main(String[] args) {
 		// Proyecto UD5
 		SpringApplication.run(ProyectoUd5Application.class, args);
+	}
+
+	// endpoints para el admin
+	@GetMapping("/productos/añadir")
+	public String añadirProduto(@RequestParam(value = "nombreProd") String nombre,
+			@RequestParam(value = "marca") String marca, @RequestParam(value = "talla") int talla,
+			@RequestParam(value = "precioProd") double precioProd) {
+
+		jdbcTemplate.update(
+				"INSERT INTO productos (nombreProd, marca, talla, precioProd, reservado) VALUES (?,?,?,?,?)", nombre,
+				marca, talla, precioProd, false);
+
+		return "Producto '" + nombre + "' añadido correctamente";
+	}
+
+	@GetMapping("/productos/actualizar/{id}")
+	public String editarProducto(@RequestParam(value = "idProd") int idProd,
+			@RequestParam(value = "nombreProd") String nombre, @RequestParam(value = "marca") String marca,
+			@RequestParam(value = "talla") int talla, @RequestParam(value = "precioProd") double precioProd,
+			@RequestParam(value = "reservado") boolean reservado) {
+
+		jdbcTemplate.update(
+				"UPDATE productos SET nombre = ?, marca = ?, talla = ?, precioProd= ?, reservado = ? WHERE id = ?",
+				nombre, marca, talla, precioProd, reservado, idProd);
+
+		return "Producto '" + nombre + "' actualizado correctamente";
+	}
+
+	@GetMapping("/productos/eliminar/{id}")
+	public String eliminarProducto(@RequestParam(value = "idProd") String idProd) {
+
+		jdbcTemplate.update("DELETE FROM productos WHERE id = ?", idProd);
+
+		return "Producto eliminado correctamente";
+	}
+
+	// endpoints para el filtro
+	@GetMapping("/productos/disponibles")
+	public List<Producto> productoDispo(@RequestParam(value = "reservado", defaultValue = "false") boolean reservado) {
+		try {
+			return jdbcTemplate.query("SELECT * FROM productos WHERE reservado = ?", new ProductoMapper(), reservado);
+		} catch (Exception e) {
+			System.out.println("Error en la busqueda de productos disponibles");
+			return null;
+		}
+
 	}
 
 }
