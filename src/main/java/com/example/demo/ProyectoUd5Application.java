@@ -21,6 +21,13 @@ public class ProyectoUd5Application {
 		super();
 		this.jdbcTemplate = jdbcTemplate;
 	}
+	
+	
+	
+	@GetMapping("/conexion")
+	public String conexion() {
+		return "Conexión establecida";
+	}
 
 	// Creacion de tablas e insert del admin
 	@GetMapping("/crear")
@@ -108,7 +115,7 @@ public class ProyectoUd5Application {
 			return new Cliente(rs.getInt("id"), rs.getString("nombre"), rs.getString("apellido"),
 					rs.getString("contraseña"), rs.getDouble("saldo"), rs.getBoolean("admin"));
 		}
-	}
+	}	
 
 	// endpoint que lista los productos para la web usando el mapper
 	@GetMapping("/listarProductos")
@@ -254,7 +261,7 @@ public class ProyectoUd5Application {
 
 		return "Producto eliminado correctamente";
 	}
-
+  
 	// endpoints para el filtro
 	@GetMapping("/productos/disponibles")
 	public List<Producto> productoDispo(@RequestParam(value = "reservado", defaultValue = "false") boolean reservado) {
