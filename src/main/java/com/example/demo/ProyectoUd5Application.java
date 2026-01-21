@@ -56,53 +56,52 @@ public class ProyectoUd5Application {
 
 		jdbcTemplate.update(
 				"INSERT INTO productos (nombreProd, marca, talla, precioProd, reservado, urlImagen) VALUES (?,?,?,?,?,?)",
-				"Nike Air Force 1", "Nike", 42, 110.0, false, "/img/airforce1.jpg");
+				"Nike Air Force 1", "Nike", 42, 110.0, false, "/img/nikeAirForce1.webp");
 
 		jdbcTemplate.update(
 				"INSERT INTO productos (nombreProd, marca, talla, precioProd, reservado, urlImagen) VALUES (?,?,?,?,?,?)",
 				"Nike Dunk Low", "Nike", 41, 115.0, false,
-				"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSNu_DJi72FXcMzVcGi7m8X1TFEmEnR8oeuA&s");
-
-		// esta no existe
+				"/img/nikeDunkLow.webp");
 		jdbcTemplate.update(
 				"INSERT INTO productos (nombreProd, marca, talla, precioProd, reservado, urlImagen) VALUES (?,?,?,?,?,?)",
-				"Adidas Stan Smith", "Adidas", 42, 95.0, false,
-				"https://cdn.grupoelcorteingles.es/SGFM/dctm/MEDIA03/202406/06/00117731204669____11__1200x1200.jpg");
-		// esta no existe
-		jdbcTemplate.update(
-				"INSERT INTO productos (nombreProd, marca, talla, precioProd, reservado, urlImagen) VALUES (?,?,?,?,?,?)",
-				"Adidas Superstar", "Adidas", 43, 105.0, false,
-				"https://assets.adidas.com/images/w_600,f_auto,q_auto/9e7f2f7e61c6403bb4f4ae7c00c6d92a_9366/Superstar_Shoes_White_EG4958_01_standard.jpg");
+				"Adidas Campus x Bad Bunny", "Adidas", 42, 160.0, false,
+				"/img/adidasCampusBadBunny.webp");
 
 		jdbcTemplate.update(
 				"INSERT INTO productos (nombreProd, marca, talla, precioProd, reservado, urlImagen) VALUES (?,?,?,?,?,?)",
-				"Puma RS-X", "Puma", 44, 120.0, false,
-				"https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_2000,h_2000/global/395550/13/sv01/fnd/EEA/fmt/png/RS-X-Efekt-Youth-Sneakers");
+				"Adidas Yeezy Boost 350 V2", "Adidas", 43, 220.0, false,
+				"/img/adidasYeezyBoost350V2.webp");
 
 		jdbcTemplate.update(
 				"INSERT INTO productos (nombreProd, marca, talla, precioProd, reservado, urlImagen) VALUES (?,?,?,?,?,?)",
-				"Puma Suede Classic", "Puma", 41, 90.0, false,
-				"https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_2000,h_2000/global/352634/75/sv01/fnd/EEA/fmt/png/Suede-Classic-XXI-Sneakers");
+				"Air Force 1 Low NOCTA Drake", "Nike", 42, 180.0, false,
+				"/img/airForce1LowNoctaDrake.webp");
 
 		jdbcTemplate.update(
 				"INSERT INTO productos (nombreProd, marca, talla, precioProd, reservado, urlImagen) VALUES (?,?,?,?,?,?)",
-				"New Balance 550", "New Balance", 42, 130.0, false,
-				"https://nb.scene7.com/is/image/NB/bb550pb1_nb_03_i?$dw_detail_main_lg$&bgc=f1f1f1&layer=1&bgcolor=f1f1f1&blendMode=mult&scale=10&wid=1600&hei=1600");
+				"Air Force 1 Black Rope Laces", "Nike", 41, 125.0, false,
+				"/img/airForce1BlackRopeLaces.webp");
 
 		jdbcTemplate.update(
 				"INSERT INTO productos (nombreProd, marca, talla, precioProd, reservado, urlImagen) VALUES (?,?,?,?,?,?)",
-				"New Balance 574", "New Balance", 43, 100.0, false,
-				"https://nb.scene7.com/is/image/NB/ml574evw_nb_02_i?$dw_detail_main_lg$");
+				"Timberland Premium 6 Inch Lace Up", "Timberland", 43, 190.0, false,
+				"/img/timberlandPremium6InchLaceUp.webp");
 
 		jdbcTemplate.update(
 				"INSERT INTO productos (nombreProd, marca, talla, precioProd, reservado, urlImagen) VALUES (?,?,?,?,?,?)",
-				"Reebok Classic Leather", "Reebok", 41, 85.0, false,
-				"https://assets.reebok.com/images/w_600,f_auto,q_auto/6e94f9d75b4f4dff9a2ead4f01010a68_9366/Classic_Leather_Shoes_White_49799_01_standard.jpg");
+				"Air Jordan 1 Retro Low OG SP Travis Scott", "Nike", 44, 240.0, false,
+				"/img/airJordan1RetroLowOGSPTravisScott.webp");
 
-		jdbcTemplate.update(
-				"INSERT INTO productos (nombreProd, marca, talla, precioProd, reservado, urlImagen) VALUES (?,?,?,?,?,?)",
-				"Vans Old Skool", "Vans", 42, 75.0, false,
-				"https://images.vans.com/is/image/Vans/VN000D3HY28-HERO?$583x583$");
+		
+		//Adidas Campus x Bad Bunny
+		//Adidas Yeezy Boost 350 V2
+		//Air Force 1 Low NOCTA Drake
+		//Air Force 1 Black Rope Laces
+		//Timberland Premium 6 Inch Lace Up
+		//Air Jordan 1 Retro Low OG SP Travis Scott
+		
+
+		
 
 		return "Productos iniciales insertados correctamente (10 zapatillas)";
 	}
