@@ -21,9 +21,7 @@ public class ProyectoUd5Application {
 		super();
 		this.jdbcTemplate = jdbcTemplate;
 	}
-	
-	
-	
+
 	@GetMapping("/conexion")
 	public String conexion() {
 		return "Conexión establecida";
@@ -40,7 +38,8 @@ public class ProyectoUd5Application {
 				+ "admin BOOLEAN DEFAULT FALSE)");
 		// tabla de productos
 		jdbcTemplate.execute("CREATE TABLE productos (" + "id SERIAL PRIMARY KEY, " + "nombreProd VARCHAR(60), "
-				+ "marca INT, " + "talla INT, " + "precioProd DOUBLE, " + "reservado BOOLEAN DEFAULT FALSE)");
+				+ "marca VARCHAR(60), " + "talla INT, " + "precioProd DOUBLE, " + "reservado BOOLEAN DEFAULT FALSE, "
+				+ "urlImagen VARCHAR(255))");
 
 		// creacion del primer administrador
 		jdbcTemplate.update("INSERT INTO clientes (nombre, apellido, contraseña, saldo, admin) VALUES (?,?,?,?,?)",
@@ -54,24 +53,24 @@ public class ProyectoUd5Application {
 	public String insertarProductosIniciales() {
 
 		jdbcTemplate.update(
-				"INSERT INTO productos (nombreProd, marca, talla, precioProd, reservado) VALUES (?,?,?,?,?)",
-				"Nike Air Force 1", 1, 42, 110.0, false);
+				"INSERT INTO productos (nombreProd, marca, talla, precioProd, reservado, urlImagen) VALUES (?,?,?,?,?,?)",
+				"Nike Air Force 1", "Nike", 42, 110.0, false, "https://miweb.com/img/airforce1.jpg");
 
 		jdbcTemplate.update(
-				"INSERT INTO productos (nombreProd, marca, talla, precioProd, reservado) VALUES (?,?,?,?,?)",
-				"Adidas Stan Smith", 2, 41, 95.0, false);
+				"INSERT INTO productos (nombreProd, marca, talla, precioProd, reservado, urlImagen) VALUES (?,?,?,?,?,?)",
+				"Adidas Stan Smith", "Adidas", 41, 95.0, false, "https://miweb.com/img/stansmith.jpg");
 
 		jdbcTemplate.update(
-				"INSERT INTO productos (nombreProd, marca, talla, precioProd, reservado) VALUES (?,?,?,?,?)",
-				"Puma RS-X", 3, 43, 120.0, false);
+				"INSERT INTO productos (nombreProd, marca, talla, precioProd, reservado, urlImagen) VALUES (?,?,?,?,?,?)",
+				"Puma RS-X", "Puma", 43, 120.0, false, "https://miweb.com/img/rsx.jpg");
 
 		jdbcTemplate.update(
-				"INSERT INTO productos (nombreProd, marca, talla, precioProd, reservado) VALUES (?,?,?,?,?)",
-				"New Balance 550", 4, 44, 130.0, false);
+				"INSERT INTO productos (nombreProd, marca, talla, precioProd, reservado, urlImagen) VALUES (?,?,?,?,?,?)",
+				"New Balance 550", "New Balance", 44, 130.0, false, "https://miweb.com/img/nb550.jpg");
 
 		jdbcTemplate.update(
-				"INSERT INTO productos (nombreProd, marca, talla, precioProd, reservado) VALUES (?,?,?,?,?)",
-				"Nike Dunk Low", 1, 42, 115.0, false);
+				"INSERT INTO productos (nombreProd, marca, talla, precioProd, reservado, urlImagen) VALUES (?,?,?,?,?,?)",
+				"Nike Dunk Low", "Nike", 42, 115.0, false, "https://miweb.com/img/dunklow.jpg");
 
 		return "Productos iniciales insertados correctamente";
 	}
@@ -103,7 +102,7 @@ public class ProyectoUd5Application {
 		@Override
 		public Producto mapRow(ResultSet rs, int rowNum) throws SQLException {
 			return new Producto(rs.getInt("id"), rs.getString("nombreProd"), rs.getString("marca"), rs.getInt("talla"),
-					rs.getDouble("precioProd"), rs.getBoolean("reservado"));
+					rs.getDouble("precioProd"), rs.getBoolean("reservado"), rs.getString("urlImagen"));
 		}
 	}
 
@@ -115,7 +114,7 @@ public class ProyectoUd5Application {
 			return new Cliente(rs.getInt("id"), rs.getString("nombre"), rs.getString("apellido"),
 					rs.getString("contraseña"), rs.getDouble("saldo"), rs.getBoolean("admin"));
 		}
-	}	
+	}
 
 	// endpoint que lista los productos para la web usando el mapper
 	@GetMapping("/listarProductos")
@@ -178,7 +177,7 @@ public class ProyectoUd5Application {
 
 	// busqueda por nombre
 	@GetMapping("/productos/nombre")
-	public List<Producto> busquedaNombre(@RequestParam(value = "nombre", defaultValue = "-") String nombre) {
+	public List<Producto> busquedaNombre(@RequestParam(value = "nombreProd", defaultValue = "-") String nombre) {
 		try {
 			return jdbcTemplate.query("SELECT * FROM productos WHERE nombreProd LIKE ? AND reservado = false",
 					new ProductoMapper(), "%" + nombre + "%");
@@ -230,26 +229,25 @@ public class ProyectoUd5Application {
 
 	// endpoints para el admin
 	@GetMapping("/productos/añadir")
-	public String añadirProduto(@RequestParam(value = "nombreProd") String nombre,
+	public String añadirProducto(@RequestParam(value = "nombreProd") String nombre,
 			@RequestParam(value = "marca") String marca, @RequestParam(value = "talla") int talla,
-			@RequestParam(value = "precioProd") double precioProd) {
-
+			@RequestParam(value = "precioProd") double precioProd,
+			@RequestParam(value = "urlImagen") String urlImagen) {
 		jdbcTemplate.update(
-				"INSERT INTO productos (nombreProd, marca, talla, precioProd, reservado) VALUES (?,?,?,?,?)", nombre,
-				marca, talla, precioProd, false);
+				"INSERT INTO productos (nombreProd, marca, talla, precioProd, reservado, urlImagen) VALUES (?,?,?,?,?,?)",
+				nombre, marca, talla, precioProd, false, urlImagen);
 
 		return "Producto '" + nombre + "' añadido correctamente";
 	}
 
-	@GetMapping("/productos/actualizar/{id}")
+	@GetMapping("/productos/actualizar")
 	public String editarProducto(@RequestParam(value = "idProd") int idProd,
 			@RequestParam(value = "nombreProd") String nombre, @RequestParam(value = "marca") String marca,
 			@RequestParam(value = "talla") int talla, @RequestParam(value = "precioProd") double precioProd,
-			@RequestParam(value = "reservado") boolean reservado) {
-
+			@RequestParam(value = "reservado") boolean reservado, @RequestParam(value = "urlImagen") String urlImagen) {
 		jdbcTemplate.update(
-				"UPDATE productos SET nombre = ?, marca = ?, talla = ?, precioProd= ?, reservado = ? WHERE id = ?",
-				nombre, marca, talla, precioProd, reservado, idProd);
+				"UPDATE productos SET nombreProd = ?, marca = ?, talla = ?, precioProd = ?, reservado = ?, urlImagen = ? WHERE id = ?",
+				nombre, marca, talla, precioProd, reservado, urlImagen, idProd);
 
 		return "Producto '" + nombre + "' actualizado correctamente";
 	}
@@ -261,7 +259,7 @@ public class ProyectoUd5Application {
 
 		return "Producto eliminado correctamente";
 	}
-  
+
 	// endpoints para el filtro
 	@GetMapping("/productos/disponibles")
 	public List<Producto> productoDispo(@RequestParam(value = "reservado", defaultValue = "false") boolean reservado) {
@@ -272,6 +270,12 @@ public class ProyectoUd5Application {
 			return null;
 		}
 
+	}
+	//endpoint que devuelve las marcas que hay disponibles 
+	@GetMapping("/productos/marcasDisponibles")
+	public List<String> obtenerMarcasDisponibles() {
+	    String sql = "SELECT DISTINCT marca FROM productos WHERE reservado = false";
+	    return jdbcTemplate.queryForList(sql, String.class);
 	}
 
 }

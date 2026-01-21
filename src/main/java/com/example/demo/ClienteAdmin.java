@@ -22,8 +22,6 @@ public class ClienteAdmin {
 
 	private static final AtomicInteger contadorId = new AtomicInteger(1);
 
-	
-
 	private static void mostrarMenu() {
 		System.out.println("-- MENU TIENDA ZAPATILLAS --");
 		System.out.println("1. Insertar zapatillas");
@@ -39,19 +37,21 @@ public class ClienteAdmin {
 		int id = calcularId();
 		String marca = leerTextoNoVacio(sc, "Introduzca la marca: ");
 		String nombre = leerTextoNoVacio(sc, "Introduzca el modelo (nombre): ");
+		String urlImagen = leerTextoNoVacio(sc, "Introduzca la URL de la imagen del producto: ");
 		int talla = leerEnteroConRango(sc, "Introduzca la talla (36-49): ", 36, 49);
 		double precioProd = leerDoubleConRango(sc, "Introduzca el precio de producción (0.1 - 300): ", 0.1, 300);
-		boolean reservado = leerBoolean(sc, "¿Están reservadas? (true/false): ");
 
-		Producto producto = new Producto(id, marca, nombre, talla, precioProd, reservado);
-		
-		
-		
-		
+
+		Producto producto = new Producto(id, marca, nombre, talla, precioProd, urlImagen);
+
+		String parametros = "?marca=" + marca.replace(" ", "%20") + "&nombreProd=" + nombre.replace(" ", "%20") + "&talla="
+				+ talla + "&precioProd=" + precioProd + "&reservado=false&urlImagen="
+				+ urlImagen.replace(" ", "%20");
+
+		endPoint(servidor + "/productos/añadir" + parametros);
+
 		System.out.println("Zapatilla creada correctamente: " + producto);
-		
-		
-		
+
 	}
 
 	private static int calcularId() {
@@ -150,15 +150,14 @@ public class ClienteAdmin {
 		String url = String.format(servidor + "/conexion");
 		System.out.println(endPoint(url));
 	}
-	
+
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 		int opcion;
-		
-		
-		
+
+		conexion();
+
 		endPoint(servidor + "/crear");
-		
 
 		do {
 			mostrarMenu();

@@ -8,12 +8,14 @@ public class Producto {
 	private int talla;
 	private double precioProd;
 	private boolean reservado;
+	private String urlImagen;
 
 	public Producto() {
 		super();
 	}
 
-	public Producto(int id, String nombreProd, String marca, int talla, double precioProd, boolean reservado) {
+	public Producto(int id, String nombreProd, String marca, int talla, double precioProd, boolean reservado,
+			String urlImagen) {
 		super();
 		this.id = id;
 		this.nombreProd = nombreProd;
@@ -21,6 +23,17 @@ public class Producto {
 		this.talla = talla;
 		this.precioProd = precioProd;
 		this.reservado = reservado;
+		this.urlImagen = urlImagen;
+	}
+
+	public Producto(int id, String nombreProd, String marca, int talla, double precioProd, String urlImagen) {
+		super();
+		this.id = id;
+		this.nombreProd = nombreProd;
+		this.marca = marca;
+		this.talla = talla;
+		this.precioProd = precioProd;
+		this.urlImagen = urlImagen;
 	}
 
 	/**
@@ -105,6 +118,14 @@ public class Producto {
 	 */
 	public void setReservado(boolean reservado) {
 		this.reservado = reservado;
+	}
+
+	public String getUrlImagen() {
+		return urlImagen;
+	}
+
+	public void setUrlImagen(String urlImagen) {
+		this.urlImagen = urlImagen;
 	}
 
 }
