@@ -50,7 +50,7 @@ public class ProyectoUd5Application {
 		return ("Base de datos creada correctamente!");
 	}
 
-	// Inserts de las zapatillas que hay en stock
+	// Inserts de las zapatillas que hay en stock con imagenes
 	@GetMapping("/productosIniciales")
 	public String insertarProductosIniciales() {
 
