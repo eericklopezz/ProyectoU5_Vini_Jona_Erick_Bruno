@@ -2,7 +2,6 @@ var marcaSeleccionada = "%";
 var tallaSeleccionada = "0";
 var listaMarcasElementos = [];
 
-
 function crearTarjetaProducto(prod) {
     const card = document.createElement("a");
     card.href = "/html/PaginaProducto.html?id=" + encodeURIComponent(prod.id);
@@ -143,6 +142,26 @@ function cargarMarcasDinamicas() {
         .catch(error => console.error('Error cargando marcas:', error));
 }
 
+function cargarProductosIniciales() {
+    fetch("http://localhost:8080/listarProductos")
+        .then(response => response.json())
+        .then(resObj => manejarProductosIniciales(resObj))
+        .catch(error => console.error('Error cargando productos iniciales:', error));
+}
+
+function manejarProductosIniciales(listaProductos) {
+    const contenedor = document.getElementById("contenidoZapatillas");
+    contenedor.innerHTML = "";
+    if (listaProductos != null && listaProductos.length > 0) {
+        for (var i = 0; i < listaProductos.length; i++) {
+            const prod = listaProductos[i];
+            const tarjeta = crearTarjetaProducto(prod);
+            contenedor.appendChild(tarjeta);
+        }
+    }
+}
+
+document.addEventListener("DOMContentLoaded", cargarProductosIniciales);
 document.addEventListener("DOMContentLoaded", cargarMarcasDinamicas);
 
 function resetearFiltros() {

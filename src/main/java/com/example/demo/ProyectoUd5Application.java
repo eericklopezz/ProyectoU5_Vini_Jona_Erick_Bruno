@@ -41,7 +41,7 @@ public class ProyectoUd5Application {
 		// tabla de productos
 		jdbcTemplate.execute("CREATE TABLE productos (" + "id SERIAL PRIMARY KEY, " + "nombreProd VARCHAR(60), "
 				+ "marca VARCHAR(60), " + "talla INT, " + "precioProd DOUBLE, " + "reservado BOOLEAN DEFAULT FALSE, "
-				+ "urlImagen VARCHAR(255))");
+				+ "idCliente INT, " + "urlImagen VARCHAR(255))");
 
 		// creacion del primer administrador
 		jdbcTemplate.update("INSERT INTO clientes (nombre, apellido, contra, saldo, admin) VALUES (?,?,?,?,?)",
@@ -163,7 +163,9 @@ public class ProyectoUd5Application {
 		@Override
 		public Producto mapRow(ResultSet rs, int rowNum) throws SQLException {
 			return new Producto(rs.getInt("id"), rs.getString("nombreProd"), rs.getString("marca"), rs.getInt("talla"),
-					rs.getDouble("precioProd"), rs.getBoolean("reservado"), rs.getString("urlImagen"));
+					rs.getDouble("precioProd"), rs.getBoolean("reservado"), rs.getObject("idCliente", Integer.class), // 👈
+					rs.getString("urlImagen"));
+
 		}
 	}
 
@@ -197,6 +199,8 @@ public class ProyectoUd5Application {
 		}
 
 	}
+
+	// endpoint para comprar
 
 	// busqueda por talla
 	@GetMapping("/productos/talla")
@@ -261,14 +265,14 @@ public class ProyectoUd5Application {
 		}
 	}
 
-	// endpoint para ver las tallas disponibles de una zapatilla
+	// endpoint para ver las tallas disponibles de una zapatilla POR ID
 	@GetMapping("/productos/tallasDisponibles")
-	public List<Integer> obtenerTallasDisponibles(@RequestParam(value = "nombreProd") String nombreProd) {
+	public List<Integer> obtenerTallasDisponibles(@RequestParam(value = "id") int idProd) {
 
-		String sql = "SELECT DISTINCT talla " + "FROM productos " + "WHERE nombreProd = ? " + "AND reservado = false "
+		String sql = "SELECT DISTINCT talla " + "FROM productos " + "WHERE id = ? " + "AND reservado = false "
 				+ "ORDER BY talla";
 
-		return jdbcTemplate.queryForList(sql, Integer.class, nombreProd);
+		return jdbcTemplate.queryForList(sql, Integer.class, idProd);
 	}
 
 	// ednpoint para ver marcas disponibles
@@ -393,42 +397,44 @@ public class ProyectoUd5Application {
 
 	// Endpoint para realizar la compra
 	@GetMapping("/comprar")
-	public String realizarCompra(@RequestParam("clienteId") int clienteId, @RequestParam("productoId") int productoId) {
+	public String realizarCompra(@RequestParam int clienteId, @RequestParam int productoId) {
 		try {
-			// obtener el Cliente
 			Cliente cliente = jdbcTemplate.queryForObject("SELECT * FROM clientes WHERE id = ?", new ClienteMapper(),
 					clienteId);
 
-			// obtener el Producto
 			Producto producto = jdbcTemplate.queryForObject("SELECT * FROM productos WHERE id = ?",
 					new ProductoMapper(), productoId);
 
-			// cuando no puedes comprar
-			if (cliente == null || producto == null) {
-				return "Error: Cliente o producto no encontrado.";
-			}
-
 			if (producto.isReservado()) {
-				return "Error: Lo sentimos, esta zapatilla ya está vendida.";
+				return "La zapatilla ya está vendida";
 			}
 
 			if (cliente.getSaldo() < producto.getPrecioProd()) {
-				return "Error: Saldo insuficiente. Te faltan " + (producto.getPrecioProd() - cliente.getSaldo()) + "€.";
+				return "Saldo insuficiente";
 			}
 
-			// actualizamos el saldo
-			double nuevoSaldo = cliente.getSaldo() - producto.getPrecioProd();
-			jdbcTemplate.update("UPDATE clientes SET saldo = ? WHERE id = ?", nuevoSaldo, clienteId);
+			// restar el saldo
+			jdbcTemplate.update("UPDATE clientes SET saldo = ? WHERE id = ?",
+					cliente.getSaldo() - producto.getPrecioProd(), clienteId);
 
-			// B. Marcar producto como reservado (vendido)
-			jdbcTemplate.update("UPDATE productos SET reservado = true WHERE id = ?", productoId);
+			// marcar producto como reservado
+			jdbcTemplate.update("UPDATE productos SET reservado = true, idCliente = ? WHERE id = ?", clienteId,
+					productoId);
 
-			return "¡Compra realizada con éxito! Nuevo saldo: " + nuevoSaldo + "€";
+			return "Compra realizada correctamente";
 
 		} catch (Exception e) {
-			e.printStackTrace();
-			return "Ocurrió un error al procesar la compra.";
+			return "Error al realizar la compra";
 		}
+	}
+
+	// endpoint para ver las compras
+	@GetMapping("/productos/misCompras")
+	public List<Producto> misCompras(@RequestParam int clienteId) {
+
+		String sql = "SELECT * FROM productos WHERE idCliente = ?";
+
+		return jdbcTemplate.query(sql, new ProductoMapper(), clienteId);
 	}
 
 }

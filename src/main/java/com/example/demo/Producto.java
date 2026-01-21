@@ -8,6 +8,7 @@ public class Producto {
 	private int talla;
 	private double precioProd;
 	private boolean reservado;
+	private int idCliente;
 	private String urlImagen;
 
 	public Producto() {
@@ -15,14 +16,14 @@ public class Producto {
 	}
 
 	public Producto(int id, String nombreProd, String marca, int talla, double precioProd, boolean reservado,
-			String urlImagen) {
-		super();
+			Integer idCliente, String urlImagen) {
 		this.id = id;
 		this.nombreProd = nombreProd;
 		this.marca = marca;
 		this.talla = talla;
 		this.precioProd = precioProd;
 		this.reservado = reservado;
+		this.idCliente = idCliente;
 		this.urlImagen = urlImagen;
 	}
 
@@ -34,6 +35,10 @@ public class Producto {
 		this.talla = talla;
 		this.precioProd = precioProd;
 		this.urlImagen = urlImagen;
+	}
+
+	public Integer getIdCliente() {
+		return idCliente;
 	}
 
 	/**
