@@ -216,7 +216,7 @@ public class ProyectoUd5Application {
 			return null;
 		}
 	}
-//hfhfs
+
 	// busqueda de producto por id
 	// endpoint para obtener un producto por ID
 	@GetMapping("/productos/{id}")
@@ -227,6 +227,13 @@ public class ProyectoUd5Application {
 			System.out.println("Producto no encontrado con id: " + id);
 			return null;
 		}
+	}
+
+	// ednpoint para ver marcas disponibles
+	@GetMapping("/productos/marcasDisponibles")
+	public List<String> obtenerMarcasDisponibles() {
+		String sql = "SELECT DISTINCT marca FROM productos WHERE reservado = false";
+		return jdbcTemplate.queryForList(sql, String.class);
 	}
 
 	// ahora el crud de clientes que solo se va a usar en consola
