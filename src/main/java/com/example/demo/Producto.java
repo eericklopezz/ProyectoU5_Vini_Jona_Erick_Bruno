@@ -8,7 +8,7 @@ public class Producto {
 	private int talla;
 	private double precioProd;
 	private boolean reservado;
-	private int idCliente;
+	private Integer idCliente;
 	private String urlImagen;
 
 	public Producto() {

@@ -1,10 +1,18 @@
-document.addEventListener("DOMContentLoaded", () => {
-    const params = new URLSearchParams(window.location.search);//Busca parámetros en la URL
-    const idProducto = params.get("id");
+const idCliente = localStorage.getItem("clienteId");
+const nombreUsuario = localStorage.getItem("nombreUsuario") || "Usuario";
 
+document.addEventListener("DOMContentLoaded", () => {
+    const params = new URLSearchParams(window.location.search);
+    const idProducto = params.get("id");
+	
     if (idProducto) {
         cargarDatosProducto(idProducto);
         cargarTallas(idProducto);
+        
+        const boton = document.getElementById("botonComprar");
+        if (boton) {
+            boton.addEventListener("click", () => comprar(idProducto));
+        }
     }
 });
 
@@ -14,26 +22,22 @@ function cargarDatosProducto(id) {
         .then(producto => {
             document.getElementById("producto-titulo").innerText = producto.nombreProd;
             document.getElementById("breadcrumb-nombre").innerText = producto.nombreProd;
-
-            // 2. Precio (Asegúrate de que el nombre coincida con tu clase Java)
             document.getElementById("producto-precio").innerText = producto.precioProd + "$";
 
-            // 3. Imagen
             const imgPrincipal = document.getElementById("producto-imagen");
             imgPrincipal.src = producto.urlImagen;
             imgPrincipal.alt = producto.nombreProd;
 
-            // 4. Actualizar miniaturas automáticamente
             const miniaturas = document.querySelectorAll(".grid-cols-4 img");
             miniaturas.forEach(m => m.src = producto.urlImagen);
         })
         .catch(error => console.error("Error cargando producto:", error));
 }
 
-
 function cargarTallas(id) {
     const contenedorTallas = document.getElementById("contenedor-tallas");
     contenedorTallas.innerHTML = "";
+	mensajeError.classList.add('hidden');
     fetch("http://localhost:8080/productos/tallasDisponibles?id=" + encodeURIComponent(id))
         .then(response => response.json())
         .then(tallas => {
@@ -45,4 +49,32 @@ function cargarTallas(id) {
             }
         })
         .catch(error => console.error("Error cargando tallas:", error));
+}
+
+function comprar(idProducto) {
+    if (!idCliente) {
+        alert("Debes iniciar sesión compai");
+        return;
+    }
+	
+    fetch("http://localhost:8080/comprar?clienteId=" + idCliente + "&productoId=" + idProducto)
+        .then(response => response.text())
+        .then(mensaje => {
+            if (mensaje == "Compra realizada correctamente") {
+                window.location.href = "/html/PaginaCompra.html";
+            }else if(mensaje == "Saldo insuficiente"){
+				mostrarError("Saldo insuficiente");
+			}else {
+                console.log("Algo fue mal bro: " + mensaje);
+            }
+        })
+        .catch(error => {
+            console.error("Error en la compra:", error);
+            alert("Error de conexión con el servidor");
+        });
+}
+
+function mostrarError(texto) {
+    mensajeError.innerText = texto;
+    mensajeError.classList.remove('hidden');
 }

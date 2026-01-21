@@ -16,9 +16,8 @@
 		<div class="contenido bg-white">
 			<div class="max-w-7xl mx-auto px-4 py-8 w-full">
 				<nav class="flex mb-8 text-sm text-gray-500" aria-label="Breadcrumb">
-					<a href="/html/PaginaPrincipal.html"
-						class="hover:text-slate-800">Página Principal</a> <span
-						class="mx-2">/</span> <span id="breadcrumb-nombre"
+					<a href="/html/PaginaPrincipal.html" class="hover:text-slate-800">Página
+						Principal</a> <span class="mx-2">/</span> <span id="breadcrumb-nombre"
 						class="font-bold text-slate-800">Jordan 4 SB Pine Green</span>
 				</nav>
 				<div class="grid grid-cols-1 md:grid-cols-2 gap-12">
@@ -27,20 +26,7 @@
 							<img id="producto-imagen" src="" alt="Cargando"
 								class="w-full h-auto object-cover">
 						</div>
-						<div class="grid grid-cols-4 gap-2">
-							<div class="border-2 border-slate-800 rounded-md  cursor-pointer">
-								<img src="" class="opacity-100 hover:opacity-80 transition">
-							</div>
-							<div class="bg-gray-100 rounded-md  cursor-pointer">
-								<img src="" class="opacity-50 hover:opacity-100 transition">
-							</div>
-							<div class="bg-gray-100 rounded-md cursor-pointer">
-								<img src="" class="opacity-50 hover:opacity-100 transition">
-							</div>
-							<div class="bg-gray-100 rounded-md cursor-pointer">
-								<img src="" class="opacity-50 hover:opacity-100 transition">
-							</div>
-						</div>
+						
 					</div>
 
 					<div class="flex flex-col">
@@ -54,17 +40,11 @@
 								class="text-2xl font-semibold text-gray-700 mt-4">250,00$</p>
 						</div>
 
-						<div class="mb-8 border-t border-b border-gray-100 py-6">
-							<p class="text-gray-600 leading-relaxed">El diseño clásico de
-								la Jordan 4 se fusiona con la durabilidad de Nike SB. Este
-								modelo cuenta con una suela de goma con agarre optimizado y
-								materiales premium para resistir cualquier trayecto.</p>
-						</div>
 
 						<div class="mb-8">
 							<div class="flex justify-between items-center mb-4">
-								<span class="text-sm font-bold text-slate-800 ">SELECCIONA
-									TU TALLA</span>
+								<span class="text-sm font-bold text-slate-800 ">
+									TALLAS DISPONIBLES:</span>
 							</div>
 							<div id="contenedor-tallas" class="grid grid-cols-5 gap-2">
 								<button
@@ -79,8 +59,10 @@
 									class="h-10 border border-gray-200 rounded-md flex items-center justify-center hover:bg-slate-800 hover:text-white transition">42</button>
 							</div>
 						</div>
-
-						<button
+						<p id="mensajeError"
+							class="text-red-500 text-sm py-3 font-medium hidden text-center mt-2">
+							Usuario o contraseña incorrectos.</p>
+						<button id="botonComprar"
 							class="w-full bg-slate-800 text-white py-4 rounded-full font-bold text-lg shadow-lg hover:bg-slate-700 transition-all duration-300 transform hover:scale-[1.02] mb-4">
 							Reservar</button>
 

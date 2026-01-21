@@ -45,7 +45,7 @@ public class ProyectoUd5Application {
 
 		// creacion del primer administrador
 		jdbcTemplate.update("INSERT INTO clientes (nombre, apellido, contra, saldo, admin) VALUES (?,?,?,?,?)",
-				"admin1", "-", "admin1", 0.0, true);
+				"admin1", "-", "admin1", 1000.0, true);
 
 		return ("Base de datos creada correctamente!");
 	}
@@ -435,6 +435,12 @@ public class ProyectoUd5Application {
 		String sql = "SELECT * FROM productos WHERE idCliente = ?";
 
 		return jdbcTemplate.query(sql, new ProductoMapper(), clienteId);
+	}
+
+	// endpoint que lista los productos q no estan reservados
+	@GetMapping("/listarProductosLibres")
+	public List<Producto> listarProductosLibres() {
+		return jdbcTemplate.query("SELECT * FROM productos WHERE reservado = false", new ProductoMapper());
 	}
 
 }

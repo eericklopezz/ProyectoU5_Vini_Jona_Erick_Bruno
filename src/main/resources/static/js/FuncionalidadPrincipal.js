@@ -143,7 +143,7 @@ function cargarMarcasDinamicas() {
 }
 
 function cargarProductosIniciales() {
-    fetch("http://localhost:8080/listarProductos")
+    fetch("http://localhost:8080/listarProductosLibres")
         .then(response => response.json())
         .then(resObj => manejarProductosIniciales(resObj))
         .catch(error => console.error('Error cargando productos iniciales:', error));
