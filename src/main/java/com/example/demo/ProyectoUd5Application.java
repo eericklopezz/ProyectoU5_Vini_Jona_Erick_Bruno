@@ -56,30 +56,54 @@ public class ProyectoUd5Application {
 
 		jdbcTemplate.update(
 				"INSERT INTO productos (nombreProd, marca, talla, precioProd, reservado, urlImagen) VALUES (?,?,?,?,?,?)",
-				"Nike Air Force 1", "Nike", 42, 110.0, false,
-				"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPoWkNZVsM95uAtNBkFXoZSMiCsRdD9nUOtg&s");
+				"Nike Air Force 1", "Nike", 42, 110.0, false, "/img/airforce1.jpg");
 
 		jdbcTemplate.update(
 				"INSERT INTO productos (nombreProd, marca, talla, precioProd, reservado, urlImagen) VALUES (?,?,?,?,?,?)",
-				"Adidas Stan Smith", "Adidas", 41, 95.0, false,
+				"Nike Dunk Low", "Nike", 41, 115.0, false,
+				"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSNu_DJi72FXcMzVcGi7m8X1TFEmEnR8oeuA&s");
+
+		jdbcTemplate.update(
+				"INSERT INTO productos (nombreProd, marca, talla, precioProd, reservado, urlImagen) VALUES (?,?,?,?,?,?)",
+				"Adidas Stan Smith", "Adidas", 42, 95.0, false,
 				"https://cdn.grupoelcorteingles.es/SGFM/dctm/MEDIA03/202406/06/00117731204669____11__1200x1200.jpg");
 
 		jdbcTemplate.update(
 				"INSERT INTO productos (nombreProd, marca, talla, precioProd, reservado, urlImagen) VALUES (?,?,?,?,?,?)",
-				"Puma RS-X", "Puma", 43, 120.0, false,
+				"Adidas Superstar", "Adidas", 43, 105.0, false,
+				"https://assets.adidas.com/images/w_600,f_auto,q_auto/9e7f2f7e61c6403bb4f4ae7c00c6d92a_9366/Superstar_Shoes_White_EG4958_01_standard.jpg");
+
+		jdbcTemplate.update(
+				"INSERT INTO productos (nombreProd, marca, talla, precioProd, reservado, urlImagen) VALUES (?,?,?,?,?,?)",
+				"Puma RS-X", "Puma", 44, 120.0, false,
 				"https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_2000,h_2000/global/395550/13/sv01/fnd/EEA/fmt/png/RS-X-Efekt-Youth-Sneakers");
 
 		jdbcTemplate.update(
 				"INSERT INTO productos (nombreProd, marca, talla, precioProd, reservado, urlImagen) VALUES (?,?,?,?,?,?)",
-				"New Balance 550", "New Balance", 44, 130.0, false,
+				"Puma Suede Classic", "Puma", 41, 90.0, false,
+				"https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_2000,h_2000/global/352634/75/sv01/fnd/EEA/fmt/png/Suede-Classic-XXI-Sneakers");
+
+		jdbcTemplate.update(
+				"INSERT INTO productos (nombreProd, marca, talla, precioProd, reservado, urlImagen) VALUES (?,?,?,?,?,?)",
+				"New Balance 550", "New Balance", 42, 130.0, false,
 				"https://nb.scene7.com/is/image/NB/bb550pb1_nb_03_i?$dw_detail_main_lg$&bgc=f1f1f1&layer=1&bgcolor=f1f1f1&blendMode=mult&scale=10&wid=1600&hei=1600");
 
 		jdbcTemplate.update(
 				"INSERT INTO productos (nombreProd, marca, talla, precioProd, reservado, urlImagen) VALUES (?,?,?,?,?,?)",
-				"Nike Dunk Low", "Nike", 42, 115.0, false,
-				"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSNu_DJi72FXcMzVcGi7m8X1TFEmEnR8oeuA&s");
+				"New Balance 574", "New Balance", 43, 100.0, false,
+				"https://nb.scene7.com/is/image/NB/ml574evw_nb_02_i?$dw_detail_main_lg$");
 
-		return "Productos iniciales insertados correctamente";
+		jdbcTemplate.update(
+				"INSERT INTO productos (nombreProd, marca, talla, precioProd, reservado, urlImagen) VALUES (?,?,?,?,?,?)",
+				"Reebok Classic Leather", "Reebok", 41, 85.0, false,
+				"https://assets.reebok.com/images/w_600,f_auto,q_auto/6e94f9d75b4f4dff9a2ead4f01010a68_9366/Classic_Leather_Shoes_White_49799_01_standard.jpg");
+
+		jdbcTemplate.update(
+				"INSERT INTO productos (nombreProd, marca, talla, precioProd, reservado, urlImagen) VALUES (?,?,?,?,?,?)",
+				"Vans Old Skool", "Vans", 42, 75.0, false,
+				"https://images.vans.com/is/image/Vans/VN000D3HY28-HERO?$583x583$");
+
+		return "Productos iniciales insertados correctamente (10 zapatillas)";
 	}
 
 	// endpoint del registro de un cliente (he puesto el admin como false
@@ -189,6 +213,18 @@ public class ProyectoUd5Application {
 					new ProductoMapper(), "%" + nombre + "%");
 		} catch (Exception e) {
 			System.out.println("Error al buscar por nombre");
+			return null;
+		}
+	}
+
+	// busqueda de producto por id
+	// endpoint para obtener un producto por ID
+	@GetMapping("/productos/{id}")
+	public Producto obtenerProductoPorId(@RequestParam(value = "id") int id) {
+		try {
+			return jdbcTemplate.queryForObject("SELECT * FROM productos WHERE id = ?", new ProductoMapper(), id);
+		} catch (Exception e) {
+			System.out.println("Producto no encontrado con id: " + id);
 			return null;
 		}
 	}
