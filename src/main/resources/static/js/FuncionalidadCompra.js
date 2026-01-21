@@ -1,12 +1,25 @@
 document.addEventListener("DOMContentLoaded", () => {
     const idClienteLogueado = localStorage.getItem("clienteId");
+    const nombreLogueado = localStorage.getItem("nombreUsuario") || "Usuario";
+
+    const nombreElemento = document.getElementById("nombre-usuario");
+    const inicialElemento = document.getElementById("user-initial");
+
+    if (nombreElemento) {
+        nombreElemento.innerText = nombreLogueado;
+    }
+    
+    if (inicialElemento && nombreLogueado !== "Usuario") {
+        inicialElemento.innerText = nombreLogueado.charAt(0).toUpperCase();
+    }
+
     if (idClienteLogueado) {
         cargarMisReservas(idClienteLogueado);
     } else {
         console.error("No hay ID de cliente en localStorage");
+
     }
 });
-
 function cargarMisReservas(idCliente) {
     const contenedor = document.getElementById("contenedor-reservas");
     const contador = document.getElementById("contador-reservas");
@@ -90,4 +103,9 @@ function cargarMisReservas(idCliente) {
             errorMsg.innerText = "Error al conectar con el servidor.";
             contenedor.appendChild(errorMsg);
         });
+}
+function cerrarSesion() {
+    localStorage.removeItem("clienteId");
+    localStorage.removeItem("nombreUsuario");
+    window.location.href = "../index.html"; 
 }

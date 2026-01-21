@@ -78,15 +78,24 @@ function buscarConFiltros() {
 
 // Selección de Marcas
 function seleccionarMarca() {
+	const esMismo = this.style.backgroundColor === "rgb(30, 41, 59)";
+	
     const todasLasMarcas = document.querySelectorAll('.FiltroMarca li');
     todasLasMarcas.forEach(li => {
-        li.style.backgroundColor = "transparent";
+        li.style.backgroundColor = "white";
         li.style.color = "#475569";
     });
-    this.style.backgroundColor = "#1E293B";
-    this.style.color = "white";
-    marcaSeleccionada = this.innerText.trim();
+	if (esMismo) {
+
+	        marcaSeleccionada = "%";
+	    } else {
+
+	        this.style.backgroundColor = "#1E293B";
+	        this.style.color = "white";
+	        marcaSeleccionada = this.innerText.trim();
+	    }
 }
+
 
 // Selección de Tallas
 const listaTallas = document.querySelectorAll('.filtroZapatillas div');

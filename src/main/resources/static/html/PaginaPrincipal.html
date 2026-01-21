@@ -10,7 +10,16 @@
 
 <body>
 	<div class="mainScreen">
-		<div class="topBar">Zapatillas</div>
+		<div class="topBar">
+			Zapatillas
+			<div class="flex items-center gap-4 w-[150px] justify-end">
+				<span id="nav-nombre-usuario"
+					class="hidden sm:block text-sm font-medium opacity-90"></span> <a
+					href="/html/PaginaCompra.html"
+					class="bg-white/10 hover:bg-white/20 px-4 py-2 rounded-lg text-xs font-bold uppercase tracking-wider transition-all border border-white/30">
+					Mis Compras </a>
+			</div>
+		</div>
 		<div class="contenido">
 			<div class="filtros space-y-3">
 
@@ -114,9 +123,7 @@
 					<input id="sliderPrecio" type="range" min="150" max="500.0"
 						step="50" value="500"
 						class="w-full accent-slate-800 cursor-pointer ">
-					<div class="flex justify-between text-xs mt-1 px-1">
-						
-					</div>
+					<div class="flex justify-between text-xs mt-1 px-1"></div>
 
 				</div>
 
@@ -135,8 +142,6 @@
 	</div>
 	</div>
 	</div>
-
-
 
 	<script src="../js/FuncionalidadPrincipal.js"></script>
 	<script src="https://cdn.tailwindcss.com"></script>
