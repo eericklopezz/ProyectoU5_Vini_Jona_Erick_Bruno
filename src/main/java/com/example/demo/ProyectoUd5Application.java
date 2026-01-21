@@ -216,7 +216,7 @@ public class ProyectoUd5Application {
 			return null;
 		}
 	}
-
+//hfhfs
 	// busqueda de producto por id
 	// endpoint para obtener un producto por ID
 	@GetMapping("/productos/{id}")
