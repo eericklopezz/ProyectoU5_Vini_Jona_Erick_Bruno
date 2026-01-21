@@ -27,7 +27,7 @@ function enviarDatosLogin(usuario, contraseña) {
 function manejarRespuestaLogin(Cliente) {
 	if (Cliente != null) {
 		console.log("funciona el login xd");
-		window.location.href = "../../PaginaPrincipal/PaginaPrincipal.html";
+		window.location.href = "/html/PaginaPrincipal.html";
 	}else{
 		console.log("no funciona el login xd");
 	}

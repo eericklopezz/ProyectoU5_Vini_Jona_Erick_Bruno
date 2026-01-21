@@ -54,13 +54,15 @@ public class ClienteAdmin {
 
 	private static void mostrarMenuZapatillas(Scanner sc) {
 		int opcion;
-		System.out.println("-- MENU TIENDA ZAPATILLAS --");
-		System.out.println("1. Insertar zapatillas");
-		System.out.println("2. Mostrar zapatillas");
-		System.out.println("3. Actualizar zapatillas");
-		System.out.println("4. Borrar zapatillas");
-		System.out.println("5. Salir");
+		
 		do {
+			System.out.println("-- MENU TIENDA ZAPATILLAS --");
+			System.out.println("1. Insertar zapatillas");
+			System.out.println("2. Mostrar zapatillas");
+			System.out.println("3. Actualizar zapatillas");
+			System.out.println("4. Borrar zapatillas");
+			System.out.println("5. Salir");
+			
 
 			opcion = leerEntero(sc, "Seleccione una opción: ");
 
@@ -80,14 +82,15 @@ public class ClienteAdmin {
 
 	private static void mostrarMenuClientes(Scanner sc) {
 		int opcion;
-		System.out.println("-- MENU CLIENTES --");
-		System.out.println("1. Insertar cliente");
-		System.out.println("2. Mostrar clientes");
-		System.out.println("3. Actualizar cliente");
-		System.out.println("4. Borrar cliente");
-		System.out.println("5. Volver");
-
+		
 		do {
+			System.out.println("-- MENU CLIENTES --");
+			System.out.println("1. Insertar cliente");
+			System.out.println("2. Mostrar clientes");
+			System.out.println("3. Actualizar cliente");
+			System.out.println("4. Borrar cliente");
+			System.out.println("5. Volver");
+
 
 			opcion = leerEntero(sc, "Seleccione una opción: ");
 
@@ -134,7 +137,6 @@ public class ClienteAdmin {
 	private static void insertarClientes(Scanner sc) {
 		System.out.println("=== INSERTAR NUEVO CLIENTE ===");
 
-		System.out.print("Introduzca el ID del cliente: ");
 		int id = calcularId();
 
 		String nombre = leerTextoNoVacio(sc, "Introduzca el nombre: ");

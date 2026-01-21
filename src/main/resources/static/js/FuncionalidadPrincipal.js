@@ -5,7 +5,7 @@ var listaMarcasElementos = [];
 
 function crearTarjetaProducto(prod) {
     const card = document.createElement("a");
-    card.href = "../PaginaProducto/PaginaProducto.html?id=" + encodeURIComponent(prod.id);
+    card.href = "/html/PaginaProducto.html?id=" + encodeURIComponent(prod.id);
     card.className = "block max-w-sm p-6 border border-gray-200 rounded-lg shadow hover:bg-gray-100 flex flex-col h-full";
 
     const img = document.createElement("img");

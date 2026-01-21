@@ -86,7 +86,6 @@ public class ProyectoUd5Application {
 				"INSERT INTO productos (nombreProd, marca, talla, precioProd, reservado, urlImagen) VALUES (?,?,?,?,?,?)",
 				"Air Jordan 1 Retro Low OG SP Travis Scott", "Nike", 44, 240.0, false,
 				"/img/airJordan1RetroLowOGSPTravisScott.webp");
-//------------------------------------
 		jdbcTemplate.update(
 				"INSERT INTO productos (nombreProd, marca, talla, precioProd, reservado, urlImagen) VALUES (?,?,?,?,?,?)",
 				"Crocs Classic Clog Marvel Spider-Man", "Crocs", 42, 65.0, false,
@@ -118,6 +117,23 @@ public class ProyectoUd5Application {
 				"INSERT INTO productos (nombreProd, marca, talla, precioProd, reservado, urlImagen) VALUES (?,?,?,?,?,?)",
 				"Jordan 1 Retro High OG UNC Reimagined", "Nike", 42, 210.0, false,
 				"/img/jordan1RetroHighOGUNCReimagined.webp");
+
+		// ---------------- zapas nuevas
+		// Adidas Forum x Bad Bunny
+		// Asics Gel-NYC Yankees
+		// Crocs Classic Star Wars
+
+		jdbcTemplate.update(
+				"INSERT INTO productos (nombreProd, marca, talla, precioProd, reservado, urlImagen) VALUES (?,?,?,?,?,?)",
+				"Adidas Forum x Bad Bunny", "Adidas", 42, 170.0, false, "/img/adidasForumxBadBunny.webp");
+
+		jdbcTemplate.update(
+				"INSERT INTO productos (nombreProd, marca, talla, precioProd, reservado, urlImagen) VALUES (?,?,?,?,?,?)",
+				"Asics Gel-NYC Yankees", "Asics", 43, 155.0, false, "/img/asicsGelNYCYankees.webp");
+
+		jdbcTemplate.update(
+				"INSERT INTO productos (nombreProd, marca, talla, precioProd, reservado, urlImagen) VALUES (?,?,?,?,?,?)",
+				"Crocs Classic Star Wars", "Crocs", 41, 70.0, false, "/img/crocsClassicStarWars.webp");
 
 		return "Productos iniciales insertados correctamente (10 zapatillas)";
 	}
@@ -373,6 +389,46 @@ public class ProyectoUd5Application {
 				""";
 
 		return jdbcTemplate.query(sql, new ProductoMapper(), marca, "%" + nombre + "%", talla, talla, precioMax);
+	}
+
+	// Endpoint para realizar la compra
+	@GetMapping("/comprar")
+	public String realizarCompra(@RequestParam("clienteId") int clienteId, @RequestParam("productoId") int productoId) {
+		try {
+			// obtener el Cliente
+			Cliente cliente = jdbcTemplate.queryForObject("SELECT * FROM clientes WHERE id = ?", new ClienteMapper(),
+					clienteId);
+
+			// obtener el Producto
+			Producto producto = jdbcTemplate.queryForObject("SELECT * FROM productos WHERE id = ?",
+					new ProductoMapper(), productoId);
+
+			// cuando no puedes comprar
+			if (cliente == null || producto == null) {
+				return "Error: Cliente o producto no encontrado.";
+			}
+
+			if (producto.isReservado()) {
+				return "Error: Lo sentimos, esta zapatilla ya está vendida.";
+			}
+
+			if (cliente.getSaldo() < producto.getPrecioProd()) {
+				return "Error: Saldo insuficiente. Te faltan " + (producto.getPrecioProd() - cliente.getSaldo()) + "€.";
+			}
+
+			// actualizamos el saldo
+			double nuevoSaldo = cliente.getSaldo() - producto.getPrecioProd();
+			jdbcTemplate.update("UPDATE clientes SET saldo = ? WHERE id = ?", nuevoSaldo, clienteId);
+
+			// B. Marcar producto como reservado (vendido)
+			jdbcTemplate.update("UPDATE productos SET reservado = true WHERE id = ?", productoId);
+
+			return "¡Compra realizada con éxito! Nuevo saldo: " + nuevoSaldo + "€";
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "Ocurrió un error al procesar la compra.";
+		}
 	}
 
 }

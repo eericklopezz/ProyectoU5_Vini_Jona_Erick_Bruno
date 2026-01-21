@@ -2,239 +2,217 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="EstiloPrincipal.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<link rel="stylesheet" href="../css/EstiloPrincipal.css">
 </head>
 
 <body>
-    <div class="mainScreen">
-        <div class="topBar">Zapatillas</div>
-        <div class="contenido">
-            <div class="filtros space-y-3">
+	<div class="mainScreen">
+		<div class="topBar">Zapatillas</div>
+		<div class="contenido">
+			<div class="filtros space-y-3">
 
-                <!--Título de filtros-->
-                <p>FIltros:</p>
-                <!-- Filtros de búsqueda -->
+				<!--Título de filtros-->
+				<p>FIltros:</p>
+				<!-- Filtros de búsqueda -->
 
-                <div id="FiltroNombre" class="bg-gray-200 w-72">
-                    <div class="relative w-full">
-                        <p class="col-span-5 text-sm text-center mb-1">Nombre</p>
-                        <input id="inputNombre" type="text" placeholder="Input"
-                            class="w-full aria-disabled:cursor-not-allowed outline-none focus:outline-none text-slate-800 dark:text-black font-sans placeholder:text-slate-600/60 bg-transparent ring-transparent border border-slate-200 transition-all duration-300 ease-in disabled:opacity-50 disabled:pointer-events-none data-[error=true]:border-red-500 data-[success=true]:border-green-500 text-sm rounded-md py-2 px-2.5 ring shadow-sm data-[icon-placement=start]:ps-9 data-[icon-placement=end]:pe-9 hover:border-slate-800 hover:ring-slate-800/10 focus:border-slate-800 focus:ring-slate-800/10 peer"
-                            data-error="false" data-success="false" data-icon-placement="" />
-                    </div>
-                </div>
+				<div id="FiltroNombre" class="bg-gray-200 w-72">
+					<div class="relative w-full">
+						<p class="col-span-5 text-sm text-center mb-1">Nombre</p>
+						<input id="inputNombre" type="text" placeholder="Input"
+							class="w-full aria-disabled:cursor-not-allowed outline-none focus:outline-none text-slate-800 dark:text-black font-sans placeholder:text-slate-600/60 bg-transparent ring-transparent border border-slate-200 transition-all duration-300 ease-in disabled:opacity-50 disabled:pointer-events-none data-[error=true]:border-red-500 data-[success=true]:border-green-500 text-sm rounded-md py-2 px-2.5 ring shadow-sm data-[icon-placement=start]:ps-9 data-[icon-placement=end]:pe-9 hover:border-slate-800 hover:ring-slate-800/10 focus:border-slate-800 focus:ring-slate-800/10 peer"
+							data-error="false" data-success="false" data-icon-placement="" />
+					</div>
+				</div>
 
 
-                <!-- Filtro de marca -->
-                <div class="FiltroMarca bg-gray-200">
-                    <p class="col-span-5 text-sm text-center mb-1">Seleccione la marca ideal</p>
-                    <ul class="flex flex-col gap-2 min-w-50">
-                        <li
-                            class="flex items-center cursor-pointer py-1.5 px-2.5 rounded-md bg-white align-middle select-none font-sans transition-all duration-300 ease-in bg-transparent text-slate-600 hover:bg-slate-800 hover:text-white shadow-lg hover:shadow-md">
-                            Nike
-                        </li>
+				<!-- Filtro de marca -->
+				<div class="FiltroMarca bg-gray-200">
+					<p class="col-span-5 text-sm text-center mb-1">Seleccione la
+						marca ideal</p>
+					<ul class="flex flex-col gap-2 min-w-50">
+						<li
+							class="flex items-center cursor-pointer py-1.5 px-2.5 rounded-md bg-white align-middle select-none font-sans transition-all duration-300 ease-in bg-transparent text-slate-600 hover:bg-slate-800 hover:text-white shadow-lg hover:shadow-md">
+							Nike</li>
 
-                        <li
-                            class="flex items-center cursor-pointer py-1.5 px-2.5 rounded-md bg-white align-middle select-none font-sans transition-all duration-300 ease-in bg-transparent text-slate-600 hover:bg-slate-800 hover:text-white shadow-lg hover:shadow-md">
-                            Adidas
-                        </li>
+						<li
+							class="flex items-center cursor-pointer py-1.5 px-2.5 rounded-md bg-white align-middle select-none font-sans transition-all duration-300 ease-in bg-transparent text-slate-600 hover:bg-slate-800 hover:text-white shadow-lg hover:shadow-md">
+							Adidas</li>
 
-                        <li
-                            class="flex items-center cursor-pointer py-1.5 px-2.5 rounded-md bg-white align-middle select-none font-sans transition-all duration-300 ease-in bg-transparent text-slate-600 hover:bg-slate-800 hover:text-white shadow-lg hover:shadow-md">
-                            Puma
-                        </li>
+						<li
+							class="flex items-center cursor-pointer py-1.5 px-2.5 rounded-md bg-white align-middle select-none font-sans transition-all duration-300 ease-in bg-transparent text-slate-600 hover:bg-slate-800 hover:text-white shadow-lg hover:shadow-md">
+							Puma</li>
 
-                        <li
-                            class="flex items-center cursor-pointer py-1.5 px-2.5 rounded-md bg-white align-middle select-none font-sans transition-all duration-300 ease-in bg-transparent text-slate-600 hover:bg-slate-800 hover:text-white shadow-lg hover:shadow-md">
-                            New Balance
-                        </li>
+						<li
+							class="flex items-center cursor-pointer py-1.5 px-2.5 rounded-md bg-white align-middle select-none font-sans transition-all duration-300 ease-in bg-transparent text-slate-600 hover:bg-slate-800 hover:text-white shadow-lg hover:shadow-md">
+							New Balance</li>
 
-                    </ul>
+					</ul>
 
-                </div>
-                <div class="filtroZapatillas grid grid-cols-5 gap-2 bg-gray-200 p-2 rounded">
-                    <p class="col-span-5 text-sm text-center mb-1">Seleccione la talla ideal</p>
+				</div>
+				<div
+					class="filtroZapatillas grid grid-cols-5 gap-2 bg-gray-200 p-2 rounded">
+					<p class="col-span-5 text-sm text-center mb-1">Seleccione la
+						talla ideal</p>
 
-                    <div
-                        class="w-7 h-7 flex items-center justify-center border select-none rounded-md bg-white transition-all duration-300 ease-in text-xs cursor-pointer hover:bg-slate-800 hover:text-white transition shadow-lg hover:shadow-md">
-                        35</div>
-                    <div
-                        class="w-7 h-7 flex items-center justify-center border select-none rounded-md bg-white transition-all duration-300 ease-in text-xs cursor-pointer hover:bg-slate-800 hover:text-white transition shadow-lg hover:shadow-md">
-                        36</div>
-                    <div
-                        class="w-7 h-7 flex items-center justify-center border select-none rounded-md bg-white transition-all duration-300 ease-in text-xs cursor-pointer hover:bg-slate-800 hover:text-white transition shadow-lg hover:shadow-md">
-                        37</div>
-                    <div
-                        class="w-7 h-7 flex items-center justify-center border select-none rounded-md bg-white transition-all duration-300 ease-in text-xs cursor-pointer hover:bg-slate-800 hover:text-white transition shadow-lg hover:shadow-md">
-                        38</div>
-                    <div
-                        class="w-7 h-7 flex items-center justify-center border select-none rounded-md bg-white transition-all duration-300 ease-in text-xs cursor-pointer hover:bg-slate-800 hover:text-white transition shadow-lg hover:shadow-md">
-                        39</div>
+					<div
+						class="w-7 h-7 flex items-center justify-center border select-none rounded-md bg-white transition-all duration-300 ease-in text-xs cursor-pointer hover:bg-slate-800 hover:text-white transition shadow-lg hover:shadow-md">
+						35</div>
+					<div
+						class="w-7 h-7 flex items-center justify-center border select-none rounded-md bg-white transition-all duration-300 ease-in text-xs cursor-pointer hover:bg-slate-800 hover:text-white transition shadow-lg hover:shadow-md">
+						36</div>
+					<div
+						class="w-7 h-7 flex items-center justify-center border select-none rounded-md bg-white transition-all duration-300 ease-in text-xs cursor-pointer hover:bg-slate-800 hover:text-white transition shadow-lg hover:shadow-md">
+						37</div>
+					<div
+						class="w-7 h-7 flex items-center justify-center border select-none rounded-md bg-white transition-all duration-300 ease-in text-xs cursor-pointer hover:bg-slate-800 hover:text-white transition shadow-lg hover:shadow-md">
+						38</div>
+					<div
+						class="w-7 h-7 flex items-center justify-center border select-none rounded-md bg-white transition-all duration-300 ease-in text-xs cursor-pointer hover:bg-slate-800 hover:text-white transition shadow-lg hover:shadow-md">
+						39</div>
 
-                    <div
-                        class="w-7 h-7 flex items-center justify-center border select-none rounded-md bg-white transition-all duration-300 ease-in text-xs cursor-pointer hover:bg-slate-800 hover:text-white transition shadow-lg hover:shadow-md">
-                        40</div>
-                    <div
-                        class="w-7 h-7 flex items-center justify-center border select-none rounded-md bg-white transition-all duration-300 ease-in text-xs cursor-pointer hover:bg-slate-800 hover:text-white transition shadow-lg hover:shadow-md">
-                        41</div>
-                    <div
-                        class="w-7 h-7 flex items-center justify-center border select-none rounded-md bg-white transition-all duration-300 ease-in text-xs cursor-pointer hover:bg-slate-800 hover:text-white transition shadow-lg hover:shadow-md">
-                        42</div>
-                    <div
-                        class="w-7 h-7 flex items-center justify-center border select-none rounded-md bg-white transition-all duration-300 ease-in text-xs cursor-pointer hover:bg-slate-800 hover:text-white transition shadow-lg hover:shadow-md">
-                        43</div>
-                    <div
-                        class="w-7 h-7 flex items-center justify-center border select-none rounded-md bg-white transition-all duration-300 ease-in text-xs cursor-pointer hover:bg-slate-800 hover:text-white transition shadow-lg hover:shadow-md">
-                        44</div>
+					<div
+						class="w-7 h-7 flex items-center justify-center border select-none rounded-md bg-white transition-all duration-300 ease-in text-xs cursor-pointer hover:bg-slate-800 hover:text-white transition shadow-lg hover:shadow-md">
+						40</div>
+					<div
+						class="w-7 h-7 flex items-center justify-center border select-none rounded-md bg-white transition-all duration-300 ease-in text-xs cursor-pointer hover:bg-slate-800 hover:text-white transition shadow-lg hover:shadow-md">
+						41</div>
+					<div
+						class="w-7 h-7 flex items-center justify-center border select-none rounded-md bg-white transition-all duration-300 ease-in text-xs cursor-pointer hover:bg-slate-800 hover:text-white transition shadow-lg hover:shadow-md">
+						42</div>
+					<div
+						class="w-7 h-7 flex items-center justify-center border select-none rounded-md bg-white transition-all duration-300 ease-in text-xs cursor-pointer hover:bg-slate-800 hover:text-white transition shadow-lg hover:shadow-md">
+						43</div>
+					<div
+						class="w-7 h-7 flex items-center justify-center border select-none rounded-md bg-white transition-all duration-300 ease-in text-xs cursor-pointer hover:bg-slate-800 hover:text-white transition shadow-lg hover:shadow-md">
+						44</div>
 
-                    <div
-                        class="w-7 h-7 flex items-center justify-center border select-none rounded-md bg-white transition-all duration-300 ease-in text-xs cursor-pointer hover:bg-slate-800 hover:text-white transition shadow-lg hover:shadow-md">
-                        45</div>
-                    <div
-                        class="w-7 h-7 flex items-center justify-center border select-none rounded-md bg-white transition-all duration-300 ease-in text-xs cursor-pointer hover:bg-slate-800 hover:text-white transition shadow-lg hover:shadow-md">
-                        46</div>
-                    <div
-                        class="w-7 h-7 flex items-center justify-center border select-none rounded-md bg-white transition-all duration-300 ease-in text-xs cursor-pointer hover:bg-slate-800 hover:text-white transition shadow-lg hover:shadow-md">
-                        47</div>
-                    <div
-                        class="w-7 h-7 flex items-center justify-center border select-none rounded-md bg-white transition-all duration-300 ease-in text-xs cursor-pointer hover:bg-slate-800 hover:text-white transition shadow-lg hover:shadow-md">
-                        48</div>
-                    <div
-                        class="w-7 h-7 flex items-center justify-center border select-none rounded-md bg-white transition-all duration-300 ease-in text-xs cursor-pointer hover:bg-slate-800 hover:text-white transition shadow-lg hover:shadow-md">
-                        49</div>
-                </div>
+					<div
+						class="w-7 h-7 flex items-center justify-center border select-none rounded-md bg-white transition-all duration-300 ease-in text-xs cursor-pointer hover:bg-slate-800 hover:text-white transition shadow-lg hover:shadow-md">
+						45</div>
+					<div
+						class="w-7 h-7 flex items-center justify-center border select-none rounded-md bg-white transition-all duration-300 ease-in text-xs cursor-pointer hover:bg-slate-800 hover:text-white transition shadow-lg hover:shadow-md">
+						46</div>
+					<div
+						class="w-7 h-7 flex items-center justify-center border select-none rounded-md bg-white transition-all duration-300 ease-in text-xs cursor-pointer hover:bg-slate-800 hover:text-white transition shadow-lg hover:shadow-md">
+						47</div>
+					<div
+						class="w-7 h-7 flex items-center justify-center border select-none rounded-md bg-white transition-all duration-300 ease-in text-xs cursor-pointer hover:bg-slate-800 hover:text-white transition shadow-lg hover:shadow-md">
+						48</div>
+					<div
+						class="w-7 h-7 flex items-center justify-center border select-none rounded-md bg-white transition-all duration-300 ease-in text-xs cursor-pointer hover:bg-slate-800 hover:text-white transition shadow-lg hover:shadow-md">
+						49</div>
+				</div>
 
-                <!-- Filtro de precio -->
-                <div class="FiltroPrecio bg-gray-200">
-                    <p class="col-span-5 text-sm text-center mb-1">
-                        Precio máximo: <span id="precioMax" class="text-slate-800">500</span>
-                    </p>
-                    <input id="sliderPrecio" type="range" min="150" max="500.0" step="50" value="500"
-                        class="w-full accent-slate-800 cursor-pointer ">
-                    <div class="flex justify-between text-xs mt-1 px-1">
-                        <span>0</span>
-                        <span>50</span>
-                        <span>100</span>
-                        <span>150</span>
-                        <span>200</span>
-                        <span>250</span>
-                        <span>300</span>
-                        <span>350</span>
-                        <span>400</span>
-                        <span>450</span>
-                        <span>500</span>
-                    </div>
+				<!-- Filtro de precio -->
+				<div class="FiltroPrecio bg-gray-200">
+					<p class="col-span-5 text-sm text-center mb-1">
+						Precio máximo: <span id="precioMax" class="text-slate-800">500</span>
+					</p>
+					<input id="sliderPrecio" type="range" min="150" max="500.0"
+						step="50" value="500"
+						class="w-full accent-slate-800 cursor-pointer ">
+					<div class="flex justify-between text-xs mt-1 px-1">
+						<span>0</span> <span>50</span> <span>100</span> <span>150</span> <span>200</span>
+						<span>250</span> <span>300</span> <span>350</span> <span>400</span>
+						<span>450</span> <span>500</span>
+					</div>
 
-                </div>
-                <!-- Filtro de productos reservados -->
-                <div class="FiltroReservado bg-gray-200">
-                    <p class="col-span-5 text-sm text-center mb-1">Incluir reservados</p>
+				</div>
+				<!-- Filtro de productos reservados -->
+				<div class="FiltroReservado bg-gray-200">
+					<p class="col-span-5 text-sm text-center mb-1">Incluir
+						reservados</p>
 
-                    <!-- Switch -->
-                    <label class="relative inline-flex items-center cursor-pointer">
-                        <input id="switchReservado" type="checkbox" value="" class="sr-only peer">
-                        <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-slate-500 rounded-full
+					<!-- Switch -->
+					<label class="relative inline-flex items-center cursor-pointer">
+						<input id="switchReservado" type="checkbox" value=""
+						class="sr-only peer">
+						<div
+							class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-slate-500 rounded-full
            peer-checked:bg-slate-800 transition-colors duration-300">
-                        </div>
-                        <span class="absolute left-0.5 top-0.5 w-5 h-5 bg-white rounded-full shadow-md
+						</div> <span
+						class="absolute left-0.5 top-0.5 w-5 h-5 bg-white rounded-full shadow-md
            peer-checked:translate-x-full transition-transform duration-300">
-                        </span>
-                    </label>
+					</span>
+					</label>
 
-                </div>
+				</div>
 
-                <button onclick="buscarConFiltros()" 
-                    class="sticky bottom-4 w-full bg-slate-800 text-white py-3 rounded-md shadow-lg hover:bg-slate-900 font-bold z-50">
-                    Aplicar Filtros
-                </button>
-            </div>
-            <div class="productos">
-                <div id="contenidoZapatillas" class="grid grid-cols-2 md:grid-cols-3 gap-4">
-                    <a href="../PaginaProducto/PaginaProducto.html"
-                        class="block max-w-sm p-6 border border-gray-200 rounded-lg shadow hover:bg-gray-100">
-                        <img class="h-auto max-w-full rounded-base" src="../ImagenesProducto/PineGreen.webp" alt="">
-                        <h5 class="mb-3 text-2xl font-semibold tracking-tight leading-8">
-                            Jordan 4 SB Pine Green
-                        </h5>
-                        <p class="text-black ">Jordan</p>
-                        <p class="text-gray-600">
-                            Desde 250$
-                        </p>
-                    </a>
-                    <a href="../PaginaProducto/PaginaProducto.html"
-                        class="block max-w-sm p-6 border border-gray-200 rounded-lg shadow hover:bg-gray-100">
-                        <img class="h-auto max-w-full rounded-base"
-                            src="../ImagenesProducto/Jordan 1 x Travis Scott x Fragment.webp" alt="">
-                        <h5 class="mb-3 text-2xl font-semibold tracking-tight leading-8">
-                            Jordan 1 x Travis Scott x Fragment
-                        </h5>
-                        <p class="text-black ">Nike</p>
-                        <p class="text-gray-600">
-                            Desde 550$
-                        </p>
-                    </a>
-                    <a href="../PaginaProducto/PaginaProducto.html"
-                        class="block max-w-sm p-6 border border-gray-200 rounded-lg shadow hover:bg-gray-100">
-                        <img class="h-auto max-w-full rounded-base" src="../ImagenesProducto/Jordan 1 Yellow.webp"
-                            alt="">
-                        <h5 class="mb-3 text-2xl font-semibold tracking-tight leading-8">
-                            Jordan 1 Yellow
-                        </h5>
-                        <p class="text-black ">Jordan</p>
-                        <p class="text-gray-600">
-                            Desde 250$
-                        </p>
-                    </a>
-                    <a href="../PaginaProducto/PaginaProducto.html"
-                        class="block max-w-sm p-6 border border-gray-200 rounded-lg shadow hover:bg-gray-100">
-                        <img class="h-auto max-w-full rounded-base" src="../ImagenesProducto/Jordan 11 Blue Legend.webp"
-                            alt="">
-                        <h5 class="mb-3 text-2xl font-semibold tracking-tight leading-8">
-                            Jordan 11 Blue Legend
-                        </h5>
-                        <p class="text-gray-600">
-                            Here are the biggest technology acquisitions of 2025 so far.
-                        </p>
-                    </a>
-                    <a href="../PaginaProducto/PaginaProducto.html"
-                        class="block max-w-sm p-6 border border-gray-200 rounded-lg shadow hover:bg-gray-100">
-                        <img class="h-auto max-w-full rounded-base" src="../ImagenesProducto/Jordan 11 Gratitude.webp"
-                            alt="">
-                        <h5 class="mb-3 text-2xl font-semibold tracking-tight leading-8">
-                            Jordan 11 Gratitude
-                        </h5>
-                        <p class="text-gray-600">
-                            Here are the biggest technology acquisitions of 2025 so far.
-                        </p>
-                    </a>
-                    <a href="../PaginaProducto/PaginaProducto.html"
-                        class="block max-w-sm p-6 border border-gray-200 rounded-lg shadow hover:bg-gray-100">
-                        <img class="h-auto max-w-full rounded-base" src="../ImagenesProducto/Jordan 4 Fear.webp" alt="">
-                        <h5 class="mb-3 text-2xl font-semibold tracking-tight leading-8">
-                            Jordan 4 Fear
-                        </h5>
-                        <p class="text-gray-600">
-                            Here are the biggest technology acquisitions of 2025 so far.
-                        </p>
-                    </a>
+				<button onclick="buscarConFiltros()"
+					class="sticky bottom-4 w-full bg-slate-800 text-white py-3 rounded-md shadow-lg hover:bg-slate-900 font-bold z-50">
+					Aplicar Filtros</button>
+			</div>
+			<div class="productos">
+				<div id="contenidoZapatillas"
+					class="grid grid-cols-2 md:grid-cols-3 gap-4">
+					<a href="../PaginaProducto/PaginaProducto.html"
+						class="block max-w-sm p-6 border border-gray-200 rounded-lg shadow hover:bg-gray-100">
+						<img class="h-auto max-w-full rounded-base"
+						src="../ImagenesProducto/PineGreen.webp" alt="">
+						<h5 class="mb-3 text-2xl font-semibold tracking-tight leading-8">
+							Jordan 4 SB Pine Green</h5>
+						<p class="text-black ">Jordan</p>
+						<p class="text-gray-600">Desde 250$</p>
+					</a> <a href="../PaginaProducto/PaginaProducto.html"
+						class="block max-w-sm p-6 border border-gray-200 rounded-lg shadow hover:bg-gray-100">
+						<img class="h-auto max-w-full rounded-base"
+						src="../ImagenesProducto/Jordan 1 x Travis Scott x Fragment.webp"
+						alt="">
+						<h5 class="mb-3 text-2xl font-semibold tracking-tight leading-8">
+							Jordan 1 x Travis Scott x Fragment</h5>
+						<p class="text-black ">Nike</p>
+						<p class="text-gray-600">Desde 550$</p>
+					</a> <a href="../PaginaProducto/PaginaProducto.html"
+						class="block max-w-sm p-6 border border-gray-200 rounded-lg shadow hover:bg-gray-100">
+						<img class="h-auto max-w-full rounded-base"
+						src="../ImagenesProducto/Jordan 1 Yellow.webp" alt="">
+						<h5 class="mb-3 text-2xl font-semibold tracking-tight leading-8">
+							Jordan 1 Yellow</h5>
+						<p class="text-black ">Jordan</p>
+						<p class="text-gray-600">Desde 250$</p>
+					</a> <a href="../PaginaProducto/PaginaProducto.html"
+						class="block max-w-sm p-6 border border-gray-200 rounded-lg shadow hover:bg-gray-100">
+						<img class="h-auto max-w-full rounded-base"
+						src="../ImagenesProducto/Jordan 11 Blue Legend.webp" alt="">
+						<h5 class="mb-3 text-2xl font-semibold tracking-tight leading-8">
+							Jordan 11 Blue Legend</h5>
+						<p class="text-gray-600">Here are the biggest technology
+							acquisitions of 2025 so far.</p>
+					</a> <a href="../PaginaProducto/PaginaProducto.html"
+						class="block max-w-sm p-6 border border-gray-200 rounded-lg shadow hover:bg-gray-100">
+						<img class="h-auto max-w-full rounded-base"
+						src="../ImagenesProducto/Jordan 11 Gratitude.webp" alt="">
+						<h5 class="mb-3 text-2xl font-semibold tracking-tight leading-8">
+							Jordan 11 Gratitude</h5>
+						<p class="text-gray-600">Here are the biggest technology
+							acquisitions of 2025 so far.</p>
+					</a> <a href="../PaginaProducto/PaginaProducto.html"
+						class="block max-w-sm p-6 border border-gray-200 rounded-lg shadow hover:bg-gray-100">
+						<img class="h-auto max-w-full rounded-base"
+						src="../ImagenesProducto/Jordan 4 Fear.webp" alt="">
+						<h5 class="mb-3 text-2xl font-semibold tracking-tight leading-8">
+							Jordan 4 Fear</h5>
+						<p class="text-gray-600">Here are the biggest technology
+							acquisitions of 2025 so far.</p>
+					</a>
 
-                </div>
-            </div>
-        </div>
-    </div>
+				</div>
+			</div>
+		</div>
+	</div>
 
-    </div>
-    </div>
-    </div>
-    </div>
+	</div>
+	</div>
+	</div>
+	</div>
 
 
 
-    <script src="FuncionalidadPrincipal.js"></script>
-    <script src="https://cdn.tailwindcss.com"></script>
+	<script src="FuncionalidadPrincipal.js"></script>
+	<script src="https://cdn.tailwindcss.com"></script>
 
 </body>
 
