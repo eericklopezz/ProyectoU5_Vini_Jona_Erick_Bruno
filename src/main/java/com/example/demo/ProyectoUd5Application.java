@@ -63,11 +63,12 @@ public class ProyectoUd5Application {
 				"Nike Dunk Low", "Nike", 41, 115.0, false,
 				"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSNu_DJi72FXcMzVcGi7m8X1TFEmEnR8oeuA&s");
 
+		// esta no existe
 		jdbcTemplate.update(
 				"INSERT INTO productos (nombreProd, marca, talla, precioProd, reservado, urlImagen) VALUES (?,?,?,?,?,?)",
 				"Adidas Stan Smith", "Adidas", 42, 95.0, false,
 				"https://cdn.grupoelcorteingles.es/SGFM/dctm/MEDIA03/202406/06/00117731204669____11__1200x1200.jpg");
-
+		// esta no existe
 		jdbcTemplate.update(
 				"INSERT INTO productos (nombreProd, marca, talla, precioProd, reservado, urlImagen) VALUES (?,?,?,?,?,?)",
 				"Adidas Superstar", "Adidas", 43, 105.0, false,
@@ -227,6 +228,16 @@ public class ProyectoUd5Application {
 			System.out.println("Producto no encontrado con id: " + id);
 			return null;
 		}
+	}
+
+	// endpoint para ver las tallas disponibles de una zapatilla
+	@GetMapping("/productos/tallasDisponibles")
+	public List<Integer> obtenerTallasDisponibles(@RequestParam(value = "nombreProd") String nombreProd) {
+
+		String sql = "SELECT DISTINCT talla " + "FROM productos " + "WHERE nombreProd = ? " + "AND reservado = false "
+				+ "ORDER BY talla";
+
+		return jdbcTemplate.queryForList(sql, Integer.class, nombreProd);
 	}
 
 	// ednpoint para ver marcas disponibles
