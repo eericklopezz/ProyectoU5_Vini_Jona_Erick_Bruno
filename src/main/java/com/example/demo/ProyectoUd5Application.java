@@ -36,7 +36,7 @@ public class ProyectoUd5Application {
 		jdbcTemplate.execute("DROP TABLE IF EXISTS clientes");
 		jdbcTemplate.execute("DROP TABLE IF EXISTS productos");
 		jdbcTemplate.execute("CREATE TABLE clientes (" + "id SERIAL PRIMARY KEY, " + "nombre VARCHAR(60), "
-				+ "apellido VARCHAR(60), " + "contraseña VARCHAR(60), " + "saldo DOUBLE, "
+				+ "apellido VARCHAR(60), " + "contra VARCHAR(60), " + "saldo DOUBLE, "
 				+ "admin BOOLEAN DEFAULT FALSE)");
 		// tabla de productos
 		jdbcTemplate.execute("CREATE TABLE productos (" + "id SERIAL PRIMARY KEY, " + "nombreProd VARCHAR(60), "
@@ -44,7 +44,7 @@ public class ProyectoUd5Application {
 				+ "urlImagen VARCHAR(255))");
 
 		// creacion del primer administrador
-		jdbcTemplate.update("INSERT INTO clientes (nombre, apellido, contraseña, saldo, admin) VALUES (?,?,?,?,?)",
+		jdbcTemplate.update("INSERT INTO clientes (nombre, apellido, contra, saldo, admin) VALUES (?,?,?,?,?)",
 				"admin1", "-", "admin1", 0.0, true);
 
 		return ("Base de datos creada correctamente!");
@@ -86,22 +86,20 @@ public class ProyectoUd5Application {
 	@GetMapping("/registro")
 	public int registrarCliente(@RequestParam(value = "nombre", defaultValue = "-") String nombre,
 			@RequestParam(value = "apellido", defaultValue = "-") String apellido,
-			@RequestParam(value = "contraseña", defaultValue = "-") String contrasenya,
+			@RequestParam(value = "contra", defaultValue = "-") String contrasenya,
 			@RequestParam(value = "saldo", defaultValue = "0") double saldo) {
-		return jdbcTemplate.update(
-				"INSERT INTO clientes (nombre, apellido, contraseña, saldo, admin) VALUES (?,?,?,?,?)", nombre,
-				apellido, contrasenya, saldo, false);
+		return jdbcTemplate.update("INSERT INTO clientes (nombre, apellido, contra, saldo, admin) VALUES (?,?,?,?,?)",
+				nombre, apellido, contrasenya, saldo, false);
 	}
 
 	// registro para la consola (ADMIN)
 	@GetMapping("/registroConsola")
 	public int registrarClienteConsola(@RequestParam(value = "nombre", defaultValue = "-") String nombre,
 			@RequestParam(value = "apellido", defaultValue = "-") String apellido,
-			@RequestParam(value = "contraseña", defaultValue = "-") String contrasenya,
+			@RequestParam(value = "contra", defaultValue = "-") String contrasenya,
 			@RequestParam(value = "saldo", defaultValue = "0") double saldo) {
-		return jdbcTemplate.update(
-				"INSERT INTO clientes (nombre, apellido, contraseña, saldo, admin) VALUES (?,?,?,?,?)", nombre,
-				apellido, contrasenya, saldo, true);
+		return jdbcTemplate.update("INSERT INTO clientes (nombre, apellido, contra, saldo, admin) VALUES (?,?,?,?,?)",
+				nombre, apellido, contrasenya, saldo, true);
 	}
 
 	// El mapper para devolver las zapatillas
@@ -119,7 +117,7 @@ public class ProyectoUd5Application {
 		@Override
 		public Cliente mapRow(ResultSet rs, int rowNum) throws SQLException {
 			return new Cliente(rs.getInt("id"), rs.getString("nombre"), rs.getString("apellido"),
-					rs.getString("contraseña"), rs.getDouble("saldo"), rs.getBoolean("admin"));
+					rs.getString("contra"), rs.getDouble("saldo"), rs.getBoolean("admin"));
 		}
 	}
 
@@ -132,9 +130,9 @@ public class ProyectoUd5Application {
 	// endpoint para el login
 	@GetMapping("/login")
 	public Cliente login(@RequestParam(value = "nombre", defaultValue = "-") String nombre,
-			@RequestParam(value = "contraseña", defaultValue = "-") String contraseña) {
+			@RequestParam(value = "contra", defaultValue = "-") String contraseña) {
 		try {
-			return jdbcTemplate.queryForObject("SELECT * FROM clientes WHERE nombre = ? AND contraseña = ?",
+			return jdbcTemplate.queryForObject("SELECT * FROM clientes WHERE nombre = ? AND contra = ?",
 					new ClienteMapper(), nombre, contraseña);
 
 		} catch (Exception e) {
@@ -216,11 +214,10 @@ public class ProyectoUd5Application {
 	// endpoint para actualizar un cliente que solo se podra hacer por consola
 	@GetMapping("/clientes/actualizar")
 	public int actualizarCliente(@RequestParam(value = "id") int id, @RequestParam(value = "nombre") String nombre,
-			@RequestParam(value = "apellido") String apellido, @RequestParam(value = "contraseña") String contrasenya,
+			@RequestParam(value = "apellido") String apellido, @RequestParam(value = "contra") String contrasenya,
 			@RequestParam(value = "saldo") double saldo) {
-		return jdbcTemplate.update(
-				"UPDATE clientes SET nombre = ?, apellido = ?, contraseña = ?, saldo = ? WHERE id = ?", nombre,
-				apellido, contrasenya, saldo, id);
+		return jdbcTemplate.update("UPDATE clientes SET nombre = ?, apellido = ?, contra = ?, saldo = ? WHERE id = ?",
+				nombre, apellido, contrasenya, saldo, id);
 	}
 
 	// endpoint de eliminar un cliente que solo lo podra hacer el admin desde la
