@@ -60,27 +60,22 @@ public class ProyectoUd5Application {
 
 		jdbcTemplate.update(
 				"INSERT INTO productos (nombreProd, marca, talla, precioProd, reservado, urlImagen) VALUES (?,?,?,?,?,?)",
-				"Nike Dunk Low", "Nike", 41, 115.0, false,
-				"/img/nikeDunkLow.webp");
+				"Nike Dunk Low", "Nike", 41, 115.0, false, "/img/nikeDunkLow.webp");
 		jdbcTemplate.update(
 				"INSERT INTO productos (nombreProd, marca, talla, precioProd, reservado, urlImagen) VALUES (?,?,?,?,?,?)",
-				"Adidas Campus x Bad Bunny", "Adidas", 42, 160.0, false,
-				"/img/adidasCampusBadBunny.webp");
+				"Adidas Campus x Bad Bunny", "Adidas", 42, 160.0, false, "/img/adidasCampusBadBunny.webp");
 
 		jdbcTemplate.update(
 				"INSERT INTO productos (nombreProd, marca, talla, precioProd, reservado, urlImagen) VALUES (?,?,?,?,?,?)",
-				"Adidas Yeezy Boost 350 V2", "Adidas", 43, 220.0, false,
-				"/img/adidasYeezyBoost350V2.webp");
+				"Adidas Yeezy Boost 350 V2", "Adidas", 43, 220.0, false, "/img/adidasYeezyBoost350V2.webp");
 
 		jdbcTemplate.update(
 				"INSERT INTO productos (nombreProd, marca, talla, precioProd, reservado, urlImagen) VALUES (?,?,?,?,?,?)",
-				"Air Force 1 Low NOCTA Drake", "Nike", 42, 180.0, false,
-				"/img/airForce1LowNoctaDrake.webp");
+				"Air Force 1 Low NOCTA Drake", "Nike", 42, 180.0, false, "/img/airForce1LowNoctaDrake.webp");
 
 		jdbcTemplate.update(
 				"INSERT INTO productos (nombreProd, marca, talla, precioProd, reservado, urlImagen) VALUES (?,?,?,?,?,?)",
-				"Air Force 1 Black Rope Laces", "Nike", 41, 125.0, false,
-				"/img/airForce1BlackRopeLaces.webp");
+				"Air Force 1 Black Rope Laces", "Nike", 41, 125.0, false, "/img/airForce1BlackRopeLaces.webp");
 
 		jdbcTemplate.update(
 				"INSERT INTO productos (nombreProd, marca, talla, precioProd, reservado, urlImagen) VALUES (?,?,?,?,?,?)",
@@ -91,17 +86,38 @@ public class ProyectoUd5Application {
 				"INSERT INTO productos (nombreProd, marca, talla, precioProd, reservado, urlImagen) VALUES (?,?,?,?,?,?)",
 				"Air Jordan 1 Retro Low OG SP Travis Scott", "Nike", 44, 240.0, false,
 				"/img/airJordan1RetroLowOGSPTravisScott.webp");
+//------------------------------------
+		jdbcTemplate.update(
+				"INSERT INTO productos (nombreProd, marca, talla, precioProd, reservado, urlImagen) VALUES (?,?,?,?,?,?)",
+				"Crocs Classic Clog Marvel Spider-Man", "Crocs", 42, 65.0, false,
+				"/img/crocsClassicClogMarvelSpiderMan.webp");
 
-		
-		//Adidas Campus x Bad Bunny
-		//Adidas Yeezy Boost 350 V2
-		//Air Force 1 Low NOCTA Drake
-		//Air Force 1 Black Rope Laces
-		//Timberland Premium 6 Inch Lace Up
-		//Air Jordan 1 Retro Low OG SP Travis Scott
-		
+		jdbcTemplate.update(
+				"INSERT INTO productos (nombreProd, marca, talla, precioProd, reservado, urlImagen) VALUES (?,?,?,?,?,?)",
+				"Crocs Classic Clog Mater Kids", "Crocs", 36, 55.0, false, "/img/crocsClassicClogMaterKids.webp");
 
-		
+		jdbcTemplate.update(
+				"INSERT INTO productos (nombreProd, marca, talla, precioProd, reservado, urlImagen) VALUES (?,?,?,?,?,?)",
+				"Asics Gel-NYC White Oyster Grey", "Asics", 42, 150.0, false, "/img/asicsGelNYCWhiteOysterGrey.webp");
+
+		jdbcTemplate.update(
+				"INSERT INTO productos (nombreProd, marca, talla, precioProd, reservado, urlImagen) VALUES (?,?,?,?,?,?)",
+				"Asics Gel-Kayano 14 Cream Sweet Pink", "Asics", 41, 160.0, false,
+				"/img/asicsGelKayano14CreamSweetPink.webp");
+
+		jdbcTemplate.update(
+				"INSERT INTO productos (nombreProd, marca, talla, precioProd, reservado, urlImagen) VALUES (?,?,?,?,?,?)",
+				"Jordan 4 Retro OG SP Undefeated (2025)", "Nike", 44, 300.0, false,
+				"/img/jordan4RetroOGSPUndefeated.webp");
+
+		jdbcTemplate.update(
+				"INSERT INTO productos (nombreProd, marca, talla, precioProd, reservado, urlImagen) VALUES (?,?,?,?,?,?)",
+				"Jordan 4 Retro Black Cat (2025)", "Nike", 43, 280.0, false, "/img/jordan4RetroBlackCat.webp");
+
+		jdbcTemplate.update(
+				"INSERT INTO productos (nombreProd, marca, talla, precioProd, reservado, urlImagen) VALUES (?,?,?,?,?,?)",
+				"Jordan 1 Retro High OG UNC Reimagined", "Nike", 42, 210.0, false,
+				"/img/jordan1RetroHighOGUNCReimagined.webp");
 
 		return "Productos iniciales insertados correctamente (10 zapatillas)";
 	}
@@ -219,7 +235,7 @@ public class ProyectoUd5Application {
 
 	// busqueda de producto por id
 	// endpoint para obtener un producto por ID
-	@GetMapping("/productos/{id}")
+	@GetMapping("/productos/id")
 	public Producto obtenerProductoPorId(@RequestParam(value = "id") int id) {
 		try {
 			return jdbcTemplate.queryForObject("SELECT * FROM productos WHERE id = ?", new ProductoMapper(), id);
@@ -253,8 +269,18 @@ public class ProyectoUd5Application {
 		return jdbcTemplate.query("SELECT * FROM clientes", new ClienteMapper());
 	}
 
+	// endpoint para actualizar un cliente que solo se podra hacer por consola
+	@GetMapping("/clientes/añadir")
+	public int añadirCliente(@RequestParam(value = "nombre") String nombre,
+			@RequestParam(value = "apellido") String apellido, @RequestParam(value = "contra") String contra,
+			@RequestParam(value = "saldo") double saldo, @RequestParam(value = "admin") boolean admin) {
+		return jdbcTemplate.update(
+				"INSERT INTO clientes (nombre, apellido, contra, saldo, admin) VALUES (?, ?, ?, ?, ?)", nombre,
+				apellido, contra, saldo, admin);
+	}
+
 	// endpoint para obtener el cliente desde la consola por ID
-	@GetMapping("/clientes/{id}")
+	@GetMapping("/clientes/id")
 	public Cliente obtenerClientePorId(@RequestParam(value = "id") int id) {
 		try {
 			return jdbcTemplate.queryForObject("SELECT * FROM clientes WHERE id = ?", new ClienteMapper(), id);
@@ -275,7 +301,7 @@ public class ProyectoUd5Application {
 
 	// endpoint de eliminar un cliente que solo lo podra hacer el admin desde la
 	// consola
-	@GetMapping("/clientes/borrar/{id}")
+	@GetMapping("/clientes/borrar")
 	public int borrarCliente(@RequestParam(value = "id") int id) {
 		return jdbcTemplate.update("DELETE FROM clientes WHERE id = ?", id);
 	}
@@ -299,7 +325,7 @@ public class ProyectoUd5Application {
 	}
 
 	@GetMapping("/productos/actualizar")
-	public String editarProducto(@RequestParam(value = "idProd") int idProd,
+	public String editarProducto(@RequestParam(value = "id") int idProd,
 			@RequestParam(value = "nombreProd") String nombre, @RequestParam(value = "marca") String marca,
 			@RequestParam(value = "talla") int talla, @RequestParam(value = "precioProd") double precioProd,
 			@RequestParam(value = "reservado") boolean reservado, @RequestParam(value = "urlImagen") String urlImagen) {
