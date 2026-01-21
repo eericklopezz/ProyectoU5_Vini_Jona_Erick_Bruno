@@ -1,0 +1,86 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.mainScreen {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.topBar {
+    height: 10%;
+    background-color: #31435d;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.contenido {
+    display: flex;
+    flex-direction: row;
+    height: 90%;
+    background-color: bisque;
+}
+
+.filtros {
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    width: 20%;
+    padding: 15px;
+    background-color: #d4d4d4;
+    justify-content: space-around;
+    align-items: stretch;
+}
+
+.productos {
+    display: flex;
+    width: 80%;
+    background-color: #ffffff;
+    justify-content: center;
+    align-items: flex-start;
+    overflow-y: auto;
+}
+
+#contenidoZapatillas {
+    width: 90%;
+    align-self: start;
+    background-color: rgb(251, 251, 251);
+}
+
+#FiltroNombre {
+    width: 95%;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.FiltroMarca {
+    width: 95%;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.FiltroPrecio {
+    width: 95%;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.filtroZapatillas {
+    width: 95%;
+    padding: 10px;
+    border-radius: 10px;
+
+}
+
+.FiltroReservado {
+    width: 95%;
+    padding: 10px;
+    border-radius: 10px;
+}

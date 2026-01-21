@@ -336,8 +336,8 @@ public class ProyectoUd5Application {
 		return "Producto '" + nombre + "' actualizado correctamente";
 	}
 
-	@GetMapping("/productos/eliminar/{id}")
-	public String eliminarProducto(@RequestParam(value = "idProd") String idProd) {
+	@GetMapping("/productos/eliminar")
+	public String eliminarProducto(@RequestParam(value = "id") String idProd) {
 
 		jdbcTemplate.update("DELETE FROM productos WHERE id = ?", idProd);
 
